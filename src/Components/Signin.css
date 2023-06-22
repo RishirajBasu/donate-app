@@ -1,13 +1,127 @@
 
 *{
-    background-color: #FFF6C3;
+    background-color: white;
 }
 
 
 
 /* Signin button */
 .input-button{
-    width: 100%;
+    width: 450px;
     background-color: #850000;
     margin-top: 50px;
+    border-radius: 20px;
+    /* border: 5px solid black; */
+    border: none;
+    transition: 200ms ease-in;
+}
+.input-button:hover{
+    background-color: blanchedalmond;
+    color: #850000;
+    font-weight: bolder;
+}
+
+.input-label{
+    text-decoration: none;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: larger;
+}
+.Email,.Number,.Date,.Confirm_password,.Password{
+    padding: 20px 20px 20px 0px;
+    display: flex;
+    /* border: 2px solid black; */
+    width: 457px;
+    height: 10px;
+    border-radius: 5px;
+    justify-content: center;
+    flex-direction: column;
+    margin: 20px 20px 20px 0px;
+}
+  #name,#email,#number,#adhaar_number,#date,#password,#confirm_password{
+    border:none;
+    /* border: 2px solid black; */
+    border-radius: 10px;
+    padding: 10px;
+    background-color: #ffe4e4;
+    color: black;
+}
+#name:hover,
+#email:hover,
+#number:hover,
+#adhaar_number:hover,
+#date:hover,
+#password:hover,
+#confirm_password:hover{
+        background-color: white;
+        color: black;
+        transition: 100ms ease-in-out;
+        border: 2px solid #850000;
+}
+#name:active,
+#email:active,
+#number:active,
+#adhaar_number:active,
+#date:active,
+#password:active,
+#confirm_password:active {
+    background-color: white;
+    color: black;
+}
+#name:focus{
+    outline-width: 0;
+}
+#name{
+    width: 50%;
+    /* margin-right: 5px; */
+}
+.name_container{
+    display: flex;
+    flex-direction: row;
+    justify-content:left ;
+}
+.name_container>.Fname,.Lname,.Fname>.errors,.Lname>.errors{
+   margin-right: 0px ;
+   display: flex;
+   flex-direction: column;
+}
+.Fname>input{
+    width: 200px;
+}
+.container_right::-webkit-scrollbar{
+    display: none;
+}
+.login_container{
+    text-align: right;
+    position: fixed;
+    top: 0;
+    bottom: 100;
+    right: 0;
+    left: 100;
+    margin-right: 50px;
+    margin-top: 30px;
+    font-weight:600;
+}
+.login>button{
+    text-decoration: none;
+    color: black;
+    background-color: #850000;
+    border-radius: 30px;
+    padding:10px;
+    color: white;
+    width: 100px;
+    margin-left: 10px;
+    transition: 200ms ease-in;
+}
+.login>button:hover{
+        background-color: blanchedalmond;
+        color: #850000;
+        text-decoration: underline;
+}
+.errors{
+    color: red;
+    /* margin-left: 44px; */
+}
+.signup_text{
+    font-size:xx-large;
+    font-weight: bolder;
 }
