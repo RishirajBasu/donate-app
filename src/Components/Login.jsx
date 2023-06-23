@@ -27,65 +27,68 @@ const Login = () => {
           <h1> Donate </h1>
         </Container_left>
         <Container_right className="container_right">
-          <div className="login_container">
+          {/* <div className="login_container">
             <p className="login">
               Ain't verified yet? <a href="#">Sign up</a>
             </p>
-          </div>
-          <div className="signup_text">
-            <p>Log in to Donate</p>
-          </div>
-          <form onSubmit={handleSubmit} autoComplete="off">
-            {/* Email */}
-            <div className="Email">
-              <label htmlFor="email" className="input-label">
-                Email :{" "}
-              </label>
-              <input
-                type="text"
-                name="email"
-                id="email"
-                autoComplete="off"
-                placeholder="Enter your Email ID"
-                value={values.email}
-                onChange={handleChange}
-                onBlur={handleBlur}
-              />
+          </div> */}
+          <div className="form-container">
+            <div className="auth-heading">
+              <p>Log in to Donate</p>
             </div>
-            {errors.email && touched.email ? (
-              <div className="errors">
-                <p>{errors.email}</p>
+            <form onSubmit={handleSubmit} autoComplete="off">
+              <div className="Email">
+                <label htmlFor="email" className="input-label">
+                  Email{" "}
+                </label>
+                <input
+                  type="text"
+                  name="email"
+                  id="email"
+                  autoComplete="off"
+                  placeholder="Enter your Email ID"
+                  value={values.email}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                />
               </div>
-            ) : null}
-
-            {/* Password */}
-            <div className="Password">
-              <label htmlFor="password" className="input-label">
-                Password :{" "}
-              </label>
-              <input
-                type="password"
-                name="password"
-                id="password"
-                autoComplete="off"
-                placeholder="Enter your Password"
-                value={values.password}
-                onChange={handleChange}
-                onBlur={handleBlur}
-              />
-            </div>
-            {errors.password && touched.password ? (
-              <div className="errors">
-                <p>{errors.password}</p>
+              {errors.email && touched.email ? (
+                <div className="errors">
+                  <p>{errors.email}</p>
+                </div>
+              ) : null}
+              <div className="Password">
+                <label htmlFor="password" className="input-label">
+                  Password{" "}
+                </label>
+                <input
+                  type="password"
+                  name="password"
+                  id="password"
+                  autoComplete="off"
+                  placeholder="Enter your Password"
+                  value={values.password}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                />
               </div>
-            ) : null}
+              {errors.password && touched.password ? (
+                <div className="errors">
+                  <p>{errors.password}</p>
+                </div>
+              ) : null}
 
-            <div className="buttons">
-              <button className="input-button" type="submit">
-                Log in
-              </button>
-            </div>
-          </form>
+              <div className="buttons">
+                <button className="input-button" type="submit">
+                  Log in
+                </button>
+              </div>
+
+              <div className="form-bottom">
+                Haven't registered yet? <a href="/signup">Sign up</a>
+              </div>
+            </form>
+          </div>
         </Container_right>
       </Wapper>
     </div>
@@ -102,22 +105,23 @@ const Container_left = styled.div`
   background: #850000;
   color: White;
   border: 2px solid #850000;
-  width: 550px;
-  height: 690px;
+  width: 35vw;
+  height: 100vh;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   h1 {
     background-color: #850000;
   }
 `;
 
 const Container_right = styled.div`
-  /* width: 500px;
-  height: 400px; */
   padding: 30px;
   position: fixed;
   top: 100px;
   bottom: 100px;
   left: 700px;
-  /* right: 200px; */
   margin-left: 50px;
   margin-right: auto;
   color: black;
