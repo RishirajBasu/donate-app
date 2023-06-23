@@ -12,12 +12,13 @@ export const signinSchema = Yup.object({
     .required("You must enter a valid number"),
   adhaar_number: Yup.number()
     .min(12)
+    .max(12)
     .positive()
     .integer()
     .required("You must enter a valid adhaar number"),
   password: Yup.string()
-    .min(8)
-    .required("Your password must be atleast 8 character long"),
+    .min(4)
+    .required("Your password must be atleast 4 character long"),
   confirm_password: Yup.string()
     .required()
     .oneOf([Yup.ref("password"), null], "Password must match"),

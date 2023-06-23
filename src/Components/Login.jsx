@@ -27,11 +27,6 @@ const Login = () => {
           <h1> Donate </h1>
         </Container_left>
         <Container_right className="container_right">
-          {/* <div className="login_container">
-            <p className="login">
-              Ain't verified yet? <a href="#">Sign up</a>
-            </p>
-          </div> */}
           <div className="form-container">
             <div className="auth-heading">
               <p>Log in to Donate</p>

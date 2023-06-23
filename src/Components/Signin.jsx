@@ -42,7 +42,9 @@ const Signin = () => {
         <Container_right className="container_right sign-up">
           <div className="form-container sign-up">
             <div className="signup_text">
-              <p>Sign up to Donate</p>
+              <div className="auth-heading">
+                <p>Sign up to Donate</p>
+              </div>
             </div>
             <form onSubmit={handleSubmit} autoComplete="off">
               {/* name */}
