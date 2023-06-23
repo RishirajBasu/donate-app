@@ -43,48 +43,12 @@
   border: 1px solid #850000;
 }
 
-.login_container {
-  text-align: right;
-  position: fixed;
-  top: 0;
-  bottom: 100;
-  right: 0;
-  left: 100;
-  margin-right: 50px;
-  margin-top: 30px;
-  font-weight: 600;
-}
-
-.login > a {
-  text-decoration: none;
-  color: black;
-  background-color: #850000;
-  border-radius: 30px;
-  padding-left: 20px;
-  padding-right: 20px;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  color: white;
-  width: 200px;
-  margin-left: 10px;
-  transition: 200ms ease-in;
-}
-
-.login > a:hover {
-  background-color: blanchedalmond;
-  color: #850000;
-  text-decoration: underline;
-}
 
 .errors {
   color: red;
   font-size: 0.7rem;
 }
 
-.signup_text {
-  font-size: xx-large;
-  font-weight: bolder;
-}
 
 .input-button {
   width: 100%;

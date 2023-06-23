@@ -5,12 +5,11 @@ import { useFormik } from "formik";
 import { signinSchema } from "./Schema";
 import { useNavigate } from "react-router-dom";
 import "./Login";
+import "./Otp";
 const Signin = () => {
   // this is used to navigate to different pages
   const navigate = useNavigate();
-  const goto = () => {
-    navigate("/login");
-  };
+
   const initialvalues = {
     fname: "",
     lname: "",
@@ -33,6 +32,9 @@ const Signin = () => {
       },
     });
   console.log(errors);
+  const goto_otp = () => {
+    errors ? alert("Kindly fill the Form properly") : navigate("/otp");
+  };
   return (
     <div>
       <Wapper>
@@ -229,7 +231,13 @@ const Signin = () => {
               </div>
 
               <div className="buttons">
-                <button className="input-button" type="submit">
+                <button
+                  className="input-button"
+                  type="submit"
+                  onClick={() => {
+                    goto_otp();
+                  }}
+                >
                   Create Account
                 </button>
               </div>
