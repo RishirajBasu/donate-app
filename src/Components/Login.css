@@ -1,0 +1,124 @@
+.form-container {
+  display: flex;
+  flex-direction: column;
+  margin-top: 50px;
+  width: 400px;
+}
+
+.auth-heading {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.input-label {
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+.Email,
+.Password {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 10px;
+  margin: 8px 0;
+}
+
+.form-container input {
+  border: none;
+  outline: none;
+  border-radius: 6px;
+  padding: 14px 16px;
+  background-color: #ffe4e4;
+  color: black;
+  border: 1px solid #ffffff;
+  transition: all 0.3s linear;
+}
+
+.form-container input:focus {
+  background-color: white;
+  color: black;
+  transition: 100ms ease-in-out;
+  border: 1px solid #850000;
+}
+
+.login_container {
+  text-align: right;
+  position: fixed;
+  top: 0;
+  bottom: 100;
+  right: 0;
+  left: 100;
+  margin-right: 50px;
+  margin-top: 30px;
+  font-weight: 600;
+}
+
+.login > a {
+  text-decoration: none;
+  color: black;
+  background-color: #850000;
+  border-radius: 30px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  color: white;
+  width: 200px;
+  margin-left: 10px;
+  transition: 200ms ease-in;
+}
+
+.login > a:hover {
+  background-color: blanchedalmond;
+  color: #850000;
+  text-decoration: underline;
+}
+
+.errors {
+  color: red;
+  font-size: 0.7rem;
+}
+
+.signup_text {
+  font-size: xx-large;
+  font-weight: bolder;
+}
+
+.input-button {
+  width: 100%;
+  background-color: #850000;
+  padding: 14px;
+  margin-top: 20px;
+  border-radius: 80px;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  font-size: 1.1rem;
+  font-weight: 500;
+  transition: all 0.3s ease-in;
+}
+
+.input-button:hover {
+  background-color: #6e0101;
+}
+
+.form-bottom {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.form-bottom a {
+  color: #6e0101;
+  text-decoration: underline;
+}
+
+.form-bottom a:hover {
+  color: #540000;
+  text-decoration: underline;
+}
+
+.container_right.login::-webkit-scrollbar{
+  display: none;
+}
