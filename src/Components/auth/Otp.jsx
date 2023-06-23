@@ -6,6 +6,10 @@ const Login = () => {
   const [OTP, setOTP] = useState("");
   const [email, setEmail] = useState("email@email.com");
   const goto_home = () => {
+    if (OTP.length < 4) {
+      alert("Please Enter Valid OTP");
+      return;
+    }
     alert("Otp Submitted");
     console.log(OTP);
   };
