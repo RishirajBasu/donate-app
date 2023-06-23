@@ -118,3 +118,7 @@
   color: #540000;
   text-decoration: underline;
 }
+
+.container_right.login::-webkit-scrollbar{
+  display: none;
+}

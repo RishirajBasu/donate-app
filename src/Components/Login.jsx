@@ -26,7 +26,7 @@ const Login = () => {
         <Container_left>
           <h1> Donate </h1>
         </Container_left>
-        <Container_right className="container_right">
+        <Container_right className="container_right login">
           <div className="form-container">
             <div className="auth-heading">
               <p>Log in to Donate</p>
