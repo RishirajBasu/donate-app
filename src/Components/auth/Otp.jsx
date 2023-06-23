@@ -4,6 +4,7 @@ import { useState } from "react";
 import OTPInput from "otp-input-react";
 const Login = () => {
   const [OTP, setOTP] = useState("");
+  const [email, setEmail] = useState("email@email.com");
   const goto_home = () => {
     alert("Otp Submitted");
     console.log(OTP);
@@ -16,8 +17,9 @@ const Login = () => {
         </div>
         <div className="container_right_otp">
           <div className="form_container">
-            <div className="auth_heading">
-              <p>Enter Otp</p>
+            <div className="auth-heading otp">
+              <h2>Verify your account</h2>
+              <p>Enter the OTP sent on {email}</p>
             </div>
             <div className="auth_body">
               <OTPInput
@@ -30,13 +32,14 @@ const Login = () => {
                 secure={false}
               />
             </div>
-            <div className="auth_submit">
+            <div className="">
               <button
+                className="input-button"
                 onClick={() => {
                   goto_home();
                 }}
               >
-                Submit
+                Verify
               </button>
             </div>
           </div>
