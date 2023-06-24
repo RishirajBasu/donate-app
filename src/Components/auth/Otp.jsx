@@ -2,9 +2,12 @@ import React from "react";
 import "./Otp.css";
 import { useState } from "react";
 import OTPInput from "otp-input-react";
-const Login = () => {
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+const Otp = () => {
   const [OTP, setOTP] = useState("");
-  const [email, setEmail] = useState("email@email.com");
+  const email = useState["email@gmail.com"];
+  const navigate_home = useNavigate();
   const goto_home = () => {
     if (OTP.length < 4) {
       alert("Please Enter Valid OTP");
@@ -12,6 +15,20 @@ const Login = () => {
     }
     alert("Otp Submitted");
     console.log(OTP);
+    navigate_home("/");
+  };
+  const verify = async () => {
+    goto_home();
+    const url = "http://127.0.0.1:8000/accounts/verify/";
+    const headers = {
+      Accept: "*/*",
+      "Content-Type": "application/json",
+    };
+    const body = {
+      email: email,
+      otp: OTP,
+    };
+    axios.post(url, { headers }, body).catch((err) => alert(err));
   };
   return (
     <div>
@@ -40,7 +57,7 @@ const Login = () => {
               <button
                 className="input-button"
                 onClick={() => {
-                  goto_home();
+                  verify();
                 }}
               >
                 Verify
@@ -53,4 +70,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Otp;

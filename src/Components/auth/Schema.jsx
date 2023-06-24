@@ -5,16 +5,13 @@ export const signinSchema = Yup.object({
   lname: Yup.string().min(2).max(30).required("You must enter a valid surname"),
   email: Yup.string().email().required("Please enter a valid email"),
   date: Yup.date().required("Please enter a valid date of birth"),
-  number: Yup.number()
+  number: Yup.string()
     .min(10)
-    .positive()
-    .integer()
+    .max(10)
     .required("You must enter a valid number"),
-  adhaar_number: Yup.number()
+  adhaar_number: Yup.string()
     .min(12)
     .max(12)
-    .positive()
-    .integer()
     .required("You must enter a valid adhaar number"),
   password: Yup.string()
     .min(4)

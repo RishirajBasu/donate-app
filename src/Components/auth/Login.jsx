@@ -3,11 +3,15 @@ import { styled } from "styled-components";
 import "./Login.css";
 import { useFormik } from "formik";
 import { signinSchema } from "./Schema";
+import { useNavigate } from "react-router-dom";
 const Login = () => {
+  const navigate_home_login = useNavigate();
+
   const initialvalues = {
     email: "",
     password: "",
   };
+
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
     useFormik({
       initialValues: initialvalues,
@@ -19,7 +23,9 @@ const Login = () => {
         action.resetForm();
       },
     });
-  console.log(errors);
+  const goto_home_login = () => {
+    navigate_home_login("/");
+  };
   return (
     <div>
       <Wapper>
@@ -74,7 +80,13 @@ const Login = () => {
               ) : null}
 
               <div className="buttons">
-                <button className="input-button" type="submit">
+                <button
+                  className="input-button"
+                  type="submit"
+                  onClick={() => {
+                    goto_home_login();
+                  }}
+                >
                   Log in
                 </button>
               </div>

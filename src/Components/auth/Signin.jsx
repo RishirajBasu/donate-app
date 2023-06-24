@@ -6,10 +6,15 @@ import { signinSchema } from "./Schema";
 import { useNavigate } from "react-router-dom";
 import "./Login";
 import "./Otp";
+import { useState } from "react";
+import axios from "axios";
 const Signin = () => {
   // this is used to navigate to different pages
   const navigate = useNavigate();
-
+  const [numeric, setNumeric] = useState({
+    number: 0,
+    adhaar_number: 0,
+  });
   const initialvalues = {
     fname: "",
     lname: "",
@@ -24,16 +29,34 @@ const Signin = () => {
     useFormik({
       initialValues: initialvalues,
       validationSchema: signinSchema,
-      validateOnChange: signinSchema,
-      validateOnBlur: signinSchema,
       onSubmit: (values, action) => {
         console.log(values);
         action.resetForm();
       },
     });
-  console.log(errors);
+  const email = values.email;
   const goto_otp = () => {
-    errors ? alert("Kindly fill the Form properly") : navigate("/otp");
+    navigate("/otp", [email]);
+  };
+  const signup = () => {
+    goto_otp();
+    const url = "http://127.0.0.1:8000/accounts/register/";
+    const headers = {
+      Accept: "*/*",
+      "Content-Type": "application/json",
+    };
+    const body = {
+      email: values.email,
+      password: values.password,
+      confirm_password: values.confirm_password,
+      adhaar_number: values.adhaar_number,
+      phone: values.number,
+      address: "abc",
+      first_name: values.fname,
+      last_name: values.lname,
+      date_of_birth: values.date,
+    };
+    axios.post(url, body).catch((err) => alert(err));
   };
   return (
     <div>
@@ -157,7 +180,9 @@ const Signin = () => {
                   onChange={handleChange}
                   onBlur={handleBlur}
                 />
-                {errors.number && touched.number ? (
+                {errors.number &&
+                touched.number &&
+                values.number.length < 10 ? (
                   <div className="errors">
                     <p>{errors.number}</p>
                   </div>
@@ -235,7 +260,7 @@ const Signin = () => {
                   className="input-button"
                   type="submit"
                   onClick={() => {
-                    goto_otp();
+                    signup();
                   }}
                 >
                   Create Account
