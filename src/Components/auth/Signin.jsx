@@ -4,6 +4,7 @@ import "./Signin.css";
 import { useFormik } from "formik";
 import { signinSchema } from "./Schema";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import "./Login";
 import "./Otp";
 const Signin = () => {
@@ -16,10 +17,12 @@ const Signin = () => {
     email: "",
     date: "",
     number: "",
+    address: "",
     adhaar_number: "",
     password: "",
     confirm_password: "",
   };
+
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
     useFormik({
       initialValues: initialvalues,
@@ -31,10 +34,62 @@ const Signin = () => {
         action.resetForm();
       },
     });
-  console.log(errors);
+
   const goto_otp = () => {
     errors ? alert("Kindly fill the Form properly") : navigate("/otp");
   };
+
+  const URL = "http://localhost:8000/accounts/register/";
+
+  const registerUser = async (values) => {
+    try {
+      if (
+        values.fname === "" ||
+        values.lname === "" ||
+        values.email === "" ||
+        values.date === "" ||
+        values.number === "" ||
+        values.address === "" ||
+        values.adhaar_number === "" ||
+        values.password === "" ||
+        values.confirm_password === ""
+      ) {
+        alert("Kindly fill the Form properly");
+        return;
+      }
+
+      if (values.password !== values.confirm_password) {
+        alert("Password and Confirm Password must be same");
+        return;
+      }
+
+      let { data } = await axios.post(
+        `${URL}`,
+        {
+          first_name: values.fname,
+          last_name: values.lname,
+          email: values.email,
+          date_of_birth: values.date,
+          phone: values.number,
+          adhaar_number: values.adhaar_number,
+          password: values.password,
+          confirm_password: values.confirm_password,
+          address: "abc address",
+        },
+        {
+          headers: {
+            "Content-type": "application/json",
+          },
+        }
+      );
+
+      alert("User registred successfully");
+    } catch (error) {
+      console.log(error);
+      alert("User registred failed");
+    }
+  };
+
   return (
     <div>
       <Wapper>
@@ -59,7 +114,7 @@ const Signin = () => {
                   <input
                     type="text"
                     name="fname"
-                    id="name"
+                    id="fname"
                     autoComplete="off"
                     placeholder="Enter your First Name"
                     value={values.fname}
@@ -82,7 +137,7 @@ const Signin = () => {
                   <input
                     type="text"
                     name="lname"
-                    id="name"
+                    id="lname"
                     autoComplete="off"
                     placeholder="Enter your Last Name"
                     value={values.lname}
@@ -235,7 +290,8 @@ const Signin = () => {
                   className="input-button"
                   type="submit"
                   onClick={() => {
-                    goto_otp();
+                    // goto_otp();
+                    registerUser(values);
                   }}
                 >
                   Create Account
