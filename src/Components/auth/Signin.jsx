@@ -38,10 +38,6 @@ const Signin = () => {
       },
     });
 
-  const goto_otp = () => {
-    errors ? alert("Kindly fill the Form properly") : navigate("/otp");
-  };
-
   const URL = "http://localhost:8000";
 
   const registerUser = async (values) => {
@@ -58,7 +54,7 @@ const Signin = () => {
         values.confirm_password === ""
       ) {
         // alert("Kindly fill the Form properly");
-        toast.warn("Kindly fill the Form properly");
+        toast.warn("Kindly fill the form properly");
         return;
       }
 
