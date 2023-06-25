@@ -6,7 +6,7 @@ import { signinSchema } from "./Schema";
 import axios from "axios";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 const Login = () => {
   const initialvalues = {
@@ -128,7 +128,7 @@ const Login = () => {
               </div>
 
               <div className="form-bottom">
-                Have not registered yet? <a href="/signup">Sign up</a>
+                Have not registered yet? <Link to="/signup">Sign up</Link>
               </div>
             </form>
           </div>

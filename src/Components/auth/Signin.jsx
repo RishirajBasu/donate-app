@@ -3,7 +3,7 @@ import { styled } from "styled-components";
 import "./Signin.css";
 import { useFormik } from "formik";
 import { signinSchema } from "./Schema";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -38,7 +38,7 @@ const Signin = () => {
       },
     });
 
-   const URL = "http://localhost:8000";
+  const URL = "http://localhost:8000";
 
   const registerUser = async (values) => {
     try {
@@ -326,7 +326,7 @@ const Signin = () => {
               </div>
 
               <div className="form-bottom">
-                Already have an account? <a href="/login">Log in</a>
+                Already have an account? <Link to={"/login"}>Login</Link>
               </div>
             </form>
           </div>
