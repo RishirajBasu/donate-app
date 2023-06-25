@@ -42,7 +42,7 @@ const Signin = () => {
     errors ? alert("Kindly fill the Form properly") : navigate("/otp");
   };
 
-  const URL = "http://localhost:8000/accounts/register/";
+  const URL = "http://localhost:8000";
 
   const registerUser = async (values) => {
     try {
@@ -52,7 +52,7 @@ const Signin = () => {
         values.email === "" ||
         values.date === "" ||
         values.number === "" ||
-        // values.address === "" ||
+        values.address === "" ||
         values.adhaar_number === "" ||
         values.password === "" ||
         values.confirm_password === ""
@@ -68,7 +68,7 @@ const Signin = () => {
       }
 
       let { data } = await axios.post(
-        `${URL}`,
+        `${URL}/accounts/register/`,
         {
           first_name: values.fname,
           last_name: values.lname,
@@ -78,7 +78,7 @@ const Signin = () => {
           adhaar_number: values.adhaar_number,
           password: values.password,
           confirm_password: values.confirm_password,
-          address: "abc address",
+          address: values.address,
         },
         {
           headers: {
@@ -168,7 +168,7 @@ const Signin = () => {
                   Email{" "}
                 </label>
                 <input
-                  type="text"
+                  type="email"
                   name="email"
                   id="email"
                   autoComplete="off"
@@ -180,6 +180,27 @@ const Signin = () => {
                 {errors.email && touched.email ? (
                   <div className="errors">
                     <p>{errors.email}</p>
+                  </div>
+                ) : null}
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="address" className="input-label">
+                  Address{" "}
+                </label>
+                <input
+                  type="address"
+                  name="address"
+                  id="address"
+                  autoComplete="off"
+                  placeholder="Enter your Address"
+                  value={values.address}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                />
+                {errors.address && touched.address ? (
+                  <div className="errors">
+                    <p>{errors.address}</p>
                   </div>
                 ) : null}
               </div>
