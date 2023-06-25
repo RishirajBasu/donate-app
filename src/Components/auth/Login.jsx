@@ -3,23 +3,65 @@ import { styled } from "styled-components";
 import "./Login.css";
 import { useFormik } from "formik";
 import { signinSchema } from "./Schema";
+import axios from "axios";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from "react-router-dom";
+
 const Login = () => {
   const initialvalues = {
     email: "",
     password: "",
   };
+
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
     useFormik({
       initialValues: initialvalues,
       validationSchema: signinSchema,
-      validateOnChange: signinSchema,
-      validateOnBlur: signinSchema,
       onSubmit: (values, action) => {
         console.log(values);
         action.resetForm();
       },
     });
-  console.log(errors);
+
+  const navigate = useNavigate();
+  const URL = "http://localhost:8000";
+
+  const loginUser = async (values) => {
+    try {
+      if (values.email === "" || values.password === "") {
+        toast.warn("Please fill all the fields!");
+        return;
+      }
+
+      let { data } = await axios.post(
+        `${URL}/accounts/login/`,
+        {
+          email: values.email,
+          password: values.password,
+        },
+        {
+          headers: {
+            "Content-type": "application/json",
+          },
+        }
+      );
+
+      if (data.data.is_verified === false) {
+        toast.warn("Please verify your email!");
+        navigate("/otp", { state: { email: values.email } });
+        return;
+      }
+
+      toast.success("Logged in successfully!");
+      localStorage.setItem("refresh", data.token.refresh);
+      localStorage.setItem("access", data.token.access);
+    } catch (error) {
+      console.log(error);
+      toast.error("Something went wrong!");
+    }
+  };
+  // console.log(errors);
   return (
     <div>
       <Wapper>
@@ -74,13 +116,19 @@ const Login = () => {
               ) : null}
 
               <div className="buttons">
-                <button className="input-button" type="submit">
+                <button
+                  className="input-button"
+                  type="submit"
+                  onClick={() => {
+                    loginUser(values);
+                  }}
+                >
                   Log in
                 </button>
               </div>
 
               <div className="form-bottom">
-                Haven't registered yet? <a href="/signup">Sign up</a>
+                Have not registered yet? <a href="/signup">Sign up</a>
               </div>
             </form>
           </div>
