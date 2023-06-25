@@ -1,20 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Otp.css";
-import { useState } from "react";
 import OTPInput from "otp-input-react";
+import { useNavigate, useLocation } from "react-router-dom";
+import { toast } from "react-toastify";
+
 const Login = () => {
   const [OTP, setOTP] = useState("");
-  const [email, setEmail] = useState("email@email.com");
+  const [email, setEmail] = useState("");
+
+  const navigate = useNavigate();
+  const location = useLocation();
+
   const goto_home = () => {
     if (OTP.length < 4) {
       alert("Please Enter Valid OTP");
       return;
     }
-    alert("Otp Submitted");
-    console.log(OTP);
+    toast.success("Otp Submitted");
   };
   return (
-    <div>
+    <>
       <div className="wrapper_otp">
         <div className="container_left_otp">
           <h1> Donate </h1>
@@ -23,7 +28,7 @@ const Login = () => {
           <div className="form_container">
             <div className="auth-heading otp">
               <h2>Verify your account</h2>
-              <p>Enter the OTP sent on {email}</p>
+              <p>Enter the OTP sent on {location.state.email}</p>
             </div>
             <div className="auth_body">
               <OTPInput
@@ -49,7 +54,7 @@ const Login = () => {
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

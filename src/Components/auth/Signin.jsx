@@ -5,8 +5,11 @@ import { useFormik } from "formik";
 import { signinSchema } from "./Schema";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "./Login";
 import "./Otp";
+
 const Signin = () => {
   // this is used to navigate to different pages
   const navigate = useNavigate();
@@ -49,17 +52,18 @@ const Signin = () => {
         values.email === "" ||
         values.date === "" ||
         values.number === "" ||
-        values.address === "" ||
+        // values.address === "" ||
         values.adhaar_number === "" ||
         values.password === "" ||
         values.confirm_password === ""
       ) {
-        alert("Kindly fill the Form properly");
+        // alert("Kindly fill the Form properly");
+        toast.warn("Kindly fill the Form properly");
         return;
       }
 
       if (values.password !== values.confirm_password) {
-        alert("Password and Confirm Password must be same");
+        toast.error("Password and Confirm Password should be same");
         return;
       }
 
@@ -83,10 +87,16 @@ const Signin = () => {
         }
       );
 
-      alert("User registred successfully");
+      toast.success("User registred successfully");
+
+      navigate("/otp", {
+        state: {
+          email: values.email,
+        },
+      });
     } catch (error) {
       console.log(error);
-      alert("User registred failed");
+      toast.error("Something went wrong!");
     }
   };
 
