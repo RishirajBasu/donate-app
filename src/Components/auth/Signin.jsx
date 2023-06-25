@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { styled } from "styled-components";
 import "./Signin.css";
 import { useFormik } from "formik";
@@ -9,10 +9,12 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./Login";
 import "./Otp";
+import LoadingButton from "../UI/LoadingButton";
 
 const Signin = () => {
   // this is used to navigate to different pages
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
 
   const initialvalues = {
     fname: "",
@@ -38,7 +40,7 @@ const Signin = () => {
       },
     });
 
-   const URL = "http://localhost:8000";
+  const URL = "http://localhost:8000";
 
   const registerUser = async (values) => {
     try {
@@ -63,6 +65,7 @@ const Signin = () => {
         return;
       }
 
+      setLoading(true);
       let { data } = await axios.post(
         `${URL}/accounts/register/`,
         {
@@ -94,6 +97,7 @@ const Signin = () => {
       console.log(error);
       toast.error("Something went wrong!");
     }
+    setLoading(false);
   };
 
   return (
@@ -313,16 +317,13 @@ const Signin = () => {
               </div>
 
               <div className="buttons">
-                <button
-                  className="input-button"
-                  type="submit"
+                <LoadingButton
+                  text={"Create Account"}
+                  loading={loading}
                   onClick={() => {
-                    // goto_otp();
                     registerUser(values);
                   }}
-                >
-                  Create Account
-                </button>
+                />
               </div>
 
               <div className="form-bottom">

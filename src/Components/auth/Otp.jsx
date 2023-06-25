@@ -5,10 +5,12 @@ import OTPInput from "otp-input-react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useLocation, useNavigate } from "react-router";
+import LoadingButton from "../UI/LoadingButton";
 
 const Otp = () => {
   const [OTP, setOTP] = useState("");
   const [email, setEmail] = useState("");
+  const [loading, setLoading] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -20,6 +22,7 @@ const Otp = () => {
         // alert("Kindly fill the Form properly");
         toast.warn("Kindly enter a valid Otp");
       } else {
+        setLoading(true);
         let { data } = await axios.post(
           `${URL}/accounts/verify/`,
           {
@@ -42,6 +45,7 @@ const Otp = () => {
         toast.error("Something went wrong");
       }
     }
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -76,14 +80,13 @@ const Otp = () => {
               />
             </div>
             <div className="verify-button">
-              <button
-                className="input-button"
+              <LoadingButton
+                text={"Verify"}
+                loading={loading}
                 onClick={() => {
                   verifyOTP();
                 }}
-              >
-                Verify
-              </button>
+              />
             </div>
           </div>
         </div>
