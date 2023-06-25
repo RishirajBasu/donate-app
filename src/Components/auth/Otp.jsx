@@ -1,26 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Otp.css";
 import axios from "axios";
 import OTPInput from "otp-input-react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useLocation } from "react-router";
+import { useLocation, useNavigate } from "react-router";
+
 const Otp = () => {
   const [OTP, setOTP] = useState("");
+  const [email, setEmail] = useState("");
   const location = useLocation();
-
-  const verifyEmail = () => {
-    if (location.state.email === null) {
-      return <Otp />;
-    } else {
-      return location.state.email;
-    }
-  };
-  // api integration
+  const navigate = useNavigate();
 
   const URL = "http://localhost:8000";
 
-  const verifyOtp = async () => {
+  const verifyOTP = async () => {
     try {
       if (OTP.length === 0 || OTP.length < 4) {
         // alert("Kindly fill the Form properly");
@@ -50,6 +44,14 @@ const Otp = () => {
     }
   };
 
+  useEffect(() => {
+    if (!location.state) {
+      return navigate("/login");
+    } else {
+      setEmail(location.state.email);
+    }
+  }, []);
+
   return (
     <>
       <div className="wrapper_otp">
@@ -60,7 +62,7 @@ const Otp = () => {
           <div className="form_container">
             <div className="auth-heading otp">
               <h2>Verify your account</h2>
-              <p>Enter the OTP sent on {verifyEmail()}</p>
+              <p>Enter the OTP sent on {email}</p>
             </div>
             <div className="auth_body">
               <OTPInput
@@ -77,7 +79,7 @@ const Otp = () => {
               <button
                 className="input-button"
                 onClick={() => {
-                  verifyOtp();
+                  verifyOTP();
                 }}
               >
                 Verify
