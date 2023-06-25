@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { styled } from "styled-components";
 import "./Login.css";
 import { useFormik } from "formik";
@@ -7,6 +7,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate, Link } from "react-router-dom";
+import LoadingButton from "../UI/LoadingButton";
 
 const Login = () => {
   const initialvalues = {
@@ -24,6 +25,7 @@ const Login = () => {
       },
     });
 
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const URL = "http://localhost:8000";
 
@@ -33,6 +35,8 @@ const Login = () => {
         toast.warn("Please fill all the fields!");
         return;
       }
+
+      setLoading(true);
 
       let { data } = await axios.post(
         `${URL}/accounts/login/`,
@@ -60,6 +64,8 @@ const Login = () => {
       console.log(error);
       toast.error("Something went wrong!");
     }
+
+    setLoading(false);
   };
   // console.log(errors);
   return (
@@ -116,15 +122,13 @@ const Login = () => {
               ) : null}
 
               <div className="buttons">
-                <button
-                  className="input-button"
-                  type="submit"
+                <LoadingButton
+                  text={"Login"}
                   onClick={() => {
                     loginUser(values);
                   }}
-                >
-                  Log in
-                </button>
+                  loading={loading}
+                />
               </div>
 
               <div className="form-bottom">
