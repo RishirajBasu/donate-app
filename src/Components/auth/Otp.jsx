@@ -1,23 +1,55 @@
 import React, { useState } from "react";
 import "./Otp.css";
+import axios from "axios";
 import OTPInput from "otp-input-react";
-import { useNavigate, useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
-
-const Login = () => {
+import "react-toastify/dist/ReactToastify.css";
+import { useLocation } from "react-router";
+const Otp = () => {
   const [OTP, setOTP] = useState("");
-  const [email, setEmail] = useState("");
-
-  const navigate = useNavigate();
   const location = useLocation();
 
-  const goto_home = () => {
-    if (OTP.length < 4) {
-      alert("Please Enter Valid OTP");
-      return;
+  const verifyEmail = () => {
+    if (location.state.email === null) {
+      return <Otp />;
+    } else {
+      return location.state.email;
     }
-    toast.success("Otp Submitted");
   };
+  // api integration
+
+  const URL = "http://localhost:8000";
+
+  const verifyOtp = async () => {
+    try {
+      if (OTP.length === 0 || OTP.length < 4) {
+        // alert("Kindly fill the Form properly");
+        toast.warn("Kindly enter a valid Otp");
+      } else {
+        let { data } = await axios.post(
+          `${URL}/accounts/verify/`,
+          {
+            email: location.state.email,
+            otp: OTP,
+          },
+          {
+            headers: {
+              "Content-type": "application/json",
+            },
+          }
+        );
+
+        toast.success("User registred successfully");
+      }
+    } catch (error) {
+      if (error.response.status === 400) {
+        toast.error(`${error.response.data.message}`);
+      } else {
+        toast.error("Something went wrong");
+      }
+    }
+  };
+
   return (
     <>
       <div className="wrapper_otp">
@@ -28,7 +60,7 @@ const Login = () => {
           <div className="form_container">
             <div className="auth-heading otp">
               <h2>Verify your account</h2>
-              <p>Enter the OTP sent on {location.state.email}</p>
+              <p>Enter the OTP sent on {verifyEmail()}</p>
             </div>
             <div className="auth_body">
               <OTPInput
@@ -41,11 +73,11 @@ const Login = () => {
                 secure={false}
               />
             </div>
-            <div className="">
+            <div className="verify-button">
               <button
                 className="input-button"
                 onClick={() => {
-                  goto_home();
+                  verifyOtp();
                 }}
               >
                 Verify
@@ -57,5 +89,4 @@ const Login = () => {
     </>
   );
 };
-
-export default Login;
+export default Otp;
