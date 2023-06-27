@@ -11,3 +11,14 @@ body {
   background-color: #ffffff;
 }
 
+ul {
+  list-style: none;
+}
+
+a,
+a:visited,
+a:hover,
+a:active {
+  text-decoration: none;
+  color: #333;
+}

@@ -1,0 +1,38 @@
+.side-nav {
+  width: 20%;
+  height: 100%;
+  background-color: #850000;
+  color: #fff;
+  border-right: 1px solid #ccc;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 80px;
+}
+
+.side-nav__logo {
+  text-align: center;
+}
+
+.side-nav__links {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.side-nav__links ul {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  font-size: 1.2rem;
+  font-weight: 400;
+}
+
+.side-nav__links ul a {
+  color: #fff;
+}
+
+.active {
+  background: yellow;
+}
