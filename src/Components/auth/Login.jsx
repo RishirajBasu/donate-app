@@ -62,7 +62,11 @@ const Login = () => {
       localStorage.setItem("access", data.token.access);
     } catch (error) {
       console.log(error);
-      toast.error("Something went wrong!");
+      if (error.response.status === 400) {
+        toast.error(error.response.data.message);
+      } else {
+        toast.error("something went wrong.Kindly re-enter the form");
+      }
     }
 
     setLoading(false);
