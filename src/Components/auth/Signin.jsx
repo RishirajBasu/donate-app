@@ -97,6 +97,8 @@ const Signin = () => {
       console.log(error);
       if (error.response.status === 400) {
         toast.error(error.response.data.message);
+      } else if (error.response.status === 404) {
+        navigate("/error");
       } else {
         toast.error("something went wrong.Kindly re-enter the form");
       }
