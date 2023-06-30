@@ -1,0 +1,76 @@
+.headerContainer{
+    padding: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 78vw;
+    flex-wrap: wrap;
+}
+.profileImage{
+    width: 10vw;
+    height: 10vw;
+    border-radius: 500px ;
+    object-fit: contain;
+    background-color: bisque;
+}
+.lastUpdate{
+    width: 30vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    border-radius: 20px;
+    background-color: rgb(255, 248, 240);
+    flex-wrap: wrap;
+}
+.updateBox{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    padding: 5px;
+    flex-wrap: wrap;
+}
+.updateDate, .updateTime{
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-top: 30px;
+}
+.updateButton {
+    padding: 5px;
+    margin-top: 20px;
+    margin-left: 40px;
+    border: none;
+    border-radius: 50px;
+    color: #850000;
+}
+.updateText{
+    margin: 30px;
+}
+.updategeo{
+    display: flex;
+    justify-content: space-around;
+}
+.profile{
+    display: flex;
+    align-items: center;
+}
+.name{
+    margin: 10px;
+}
+.editbutton{
+    margin: 10px;
+    border: none;
+    border-radius: 20px;
+    padding: 10px;
+    background-color: #850000;
+    color: antiquewhite;
+    transition: 90ms ease-in-out;
+}
+.editbutton:hover{
+    background-color: #640303;
+        color: antiquewhite;
+}
+.profileContent{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}

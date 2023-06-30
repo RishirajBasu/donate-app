@@ -12,9 +12,24 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: #ffe4e4;
+    background-color: #f9eded;
 }
-
+.errorButton{
+        width: 10vw;
+        background-color: #850000;
+        padding: 20px;
+        margin-top: 20px;
+        border-radius: 30px;
+        border: none;
+        color: #fff;
+        cursor: pointer;
+        font-size: 1.1rem;
+        font-weight: 500;
+        transition: all 0.3s ease-in;
+}
+.errorButton:hover{
+    background-color: #6e0101;
+}
 .errortype {
     margin-top: 50px;
     text-align: center;

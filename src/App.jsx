@@ -4,6 +4,7 @@ import Signin from "./Components/auth/Signin";
 import Login from "./Components/auth/Login";
 import Otp from "./Components/auth/Otp";
 import Error from "./Components/errorpages/Error";
+import Home from "./Components/Home";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -20,6 +21,7 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/otp" element={<Otp />} />
             <Route path="/error" element={<Error />} />
+            <Route path="/home" element={<Home />} />
           </Routes>
         </BrowserRouter>
       </div>

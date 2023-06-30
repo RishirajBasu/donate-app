@@ -1,11 +1,11 @@
 import React from "react";
 import "./Error.css";
-import { Button } from "@mui/material";
 import { useNavigate } from "react-router";
 const Error = () => {
   const navigate = useNavigate();
-  const goto_home = () => {
-    navigate("/");
+  const gotoHome = () => {
+    console.log("cliked");
+    navigate("/home");
   };
   return (
     <div className="container">
@@ -15,9 +15,9 @@ const Error = () => {
         <p className="errormsg">Opps! Some Error Occurred.</p>
       </div>
       <div className="button">
-        <Button variant="contained" color="error" onClick={goto_home()}>
+        <button className="errorButton" onClick={gotoHome()}>
           Home
-        </Button>
+        </button>
       </div>
     </div>
   );
