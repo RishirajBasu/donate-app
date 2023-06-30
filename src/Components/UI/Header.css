@@ -24,10 +24,14 @@
 }
 .updateBox{
     display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
+    flex-direction: column;
     padding: 5px;
     flex-wrap: wrap;
+}
+.data{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
 }
 .updateDate, .updateTime{
     margin-left: 5px;
@@ -43,11 +47,14 @@
     color: #850000;
 }
 .updateText{
-    margin: 30px;
-}
-.updategeo{
     display: flex;
-    justify-content: space-around;
+    flex-direction: row;
+    padding-top: 20px;
+    padding-left: 20px;
+    cursor: pointer;
+}
+.updateText h4{
+     margin-left: 15px;
 }
 .profile{
     display: flex;

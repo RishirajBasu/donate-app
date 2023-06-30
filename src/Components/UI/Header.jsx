@@ -25,21 +25,14 @@ const Header = () => {
       <div className="lastUpdate">
         <div className="updateBox">
           <div className="updateText">
-            <h4>Last Updated:</h4>
-          </div>
-          <div className="updateDate">12/16/2020</div>
-          <div className="updateTime">12:30pm</div>
-          <div className="updateButton">
             <UpdateIcon />
+            <h4>Location Last Updated:</h4>
           </div>
-        </div>
-        <div className="updategeo">
-          <div className="longitude">
-            <p>Longitude : 4654215</p>
+          <div className="data">
+            <div className="updateDate">12/16/2020</div>
+            <div className="updateTime">12:30pm</div>
           </div>
-          <div className="lattitude">
-            <p>Lattitude: 456462165</p>
-          </div>
+          <div className="updateButton"></div>
         </div>
       </div>
     </div>
