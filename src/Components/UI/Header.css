@@ -1,32 +1,35 @@
 .headerContainer{
-    padding: 20px;
+    padding: 25px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     width: 78vw;
     flex-wrap: wrap;
-    margin-left: 280px;
+    margin-right: 10px;
+}
+.refresh{
+    all:unset;
+    display: flex;
+    justify-content: flex-start;
 }
 .profileImage{
     width: 10vw;
     height: 10vw;
     border-radius: 500px ;
     object-fit: contain;
-    background-color: bisque;
+    background-color: rgb(255, 183, 0);
 }
 .lastUpdate{
-    width: 30vw;
     display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
+    flex-direction: row;
+    justify-content: center;
     border-radius: 20px;
-    background-color: rgb(255, 248, 240);
+    /* background-color: rgb(255, 248, 240); */
     flex-wrap: wrap;
 }
 .updateBox{
     display: flex;
-    flex-direction: column;
-    padding: 5px;
+    flex-direction: row;
     flex-wrap: wrap;
 }
 .data{
@@ -34,25 +37,23 @@
     flex-direction: row;
     justify-content: space-evenly;
 }
-.updateDate, .updateTime{
+.updateDate{
     margin-left: 5px;
     margin-right: 5px;
-    margin-top: 30px;
-}
-.updateButton {
-    padding: 5px;
     margin-top: 20px;
-    margin-left: 40px;
-    border: none;
-    border-radius: 50px;
-    color: #850000;
+}
+.updateIcon{
+    cursor: pointer;
+}
+.updateIcon:hover{
+    color: red;
 }
 .updateText{
     display: flex;
     flex-direction: row;
     padding-top: 20px;
     padding-left: 20px;
-    cursor: pointer;
+    cursor: default;
 }
 .updateText h4{
      margin-left: 15px;
@@ -66,15 +67,17 @@
 }
 .editbutton{
     margin: 10px;
-    border: none;
+    width: 8vw;
+    border: 2px solid red;
     border-radius: 20px;
+    font-size: large;
     padding: 10px;
-    background-color: #850000;
-    color: antiquewhite;
+    background-color: white;
+    color: red;
     transition: 90ms ease-in-out;
 }
 .editbutton:hover{
-    background-color: #640303;
+    background-color: red;
         color: antiquewhite;
         cursor: pointer;
 }

@@ -88,5 +88,27 @@
         cursor: pointer;
 }
 .signout {
-    margin-top: 90px !important;
+    margin-top: 200px;
+    width: 15vw;
+        padding: 20px;
+        border-radius: 20px;
+        background-color: #850000;
+        border: none;
+        text-align: left;
+        font-weight: bolder;
+        font-size: larger;
+        color: antiquewhite;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        transition: 90ms ease-in;
+}
+.signout:hover{
+    padding: 20px;
+        border: none;
+        text-align: center;
+        color: antiquewhite;
+        border-radius: 20px;
+        background-color: rgba(255, 255, 255, 0.383);
+        cursor: pointer;
 }

@@ -4,3 +4,80 @@
     flex-wrap: nowrap;
 }
 
+.homeRight{
+    margin-left: 300px;
+}
+.donor{
+    display: flex;
+    flex-direction: row;
+}
+.donorList{
+    width: 60vw;
+}
+.submitRequest{
+   
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+}
+.submitRequest button{
+    
+    margin: 20px;
+    margin-right: 56px;
+    padding: 20px;
+    border: 2px solid red;
+    border-radius: 80px;
+    background-color: red;
+    text-align: center;
+    font-weight: bolder;
+    font-size: larger;
+    color: antiquewhite;
+    transition: 90ms ease-in;
+    align-self: flex-start;
+    
+}
+.submitRequest button:hover {
+    color: red;
+        background-color:white;
+        cursor: pointer;
+}
+.loop{
+    color: #850000;
+    margin-left: auto;
+    cursor: pointer;
+    transition: 90ms ease-in;
+}
+.loop:hover{
+    color: #e40e0e;
+}
+
+.tabBox{
+    margin-top: 20px;
+    border-radius: 50px;
+    padding: 30px;
+    height: 55vh;
+    border: 2px solid rgba(0, 0, 0, 0.251);
+    overflow: scroll;
+    
+}
+.tabBox::-webkit-scrollbar{
+    display: none;
+}
+.detailbox{
+    display: flex;
+    flex-direction: row;
+    margin: 20px;
+}
+.donorDistance{
+    display: flex;
+    flex-direction: row;
+    margin-left: auto;
+    color: rgba(255, 0, 0, 0.77);
+}
+.donorName{
+    color: rgba(255, 0, 0, 0.77);
+    border: none;
+}
+.donorAddress{
+    color: rgba(0, 0, 0, 0.354);
+}

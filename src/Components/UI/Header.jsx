@@ -2,20 +2,20 @@ import React from "react";
 import "./Header.css";
 import profileimage from "../Assets/profile.png";
 import { useState } from "react";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import UpdateIcon from "@mui/icons-material/Update";
 import axios from "axios";
-import { useLocation, useNavigate } from "react-router";
+import { useNavigate } from "react-router";
 import { useEffect } from "react";
-const Header = () => {
+import { Update } from "@mui/icons-material";
+const Header = ({ user_id }) => {
+  // dummy data
   const profileInfo = {
     fname: "Shirsha",
     lname: "Basu",
     created_at: "12/03/2023 at 11:30",
   };
+  // get request to udpateprofile api
   const [response, setResponse] = useState(null);
-  const location = useLocation();
-  const user_id = location.state.user_id;
   console.log(user_id);
   const url = `http://127.0.0.1:8000/accounts/profile/${user_id}`;
   useEffect(() => {
@@ -33,8 +33,55 @@ const Header = () => {
   }, []);
   const jsdate = () => {
     const isodate = new Date(response.data.created_at);
-    return isodate.toString().slice(0, 16);
+    return isodate.toString().slice(0, 25) + "Hrs";
   };
+  const update = () => {
+    const isotime = new Date(response.data.coordinates.last_updated);
+    return isotime.toString().slice(0, 25) + "Hrs";
+  };
+
+  // geoLocation
+  const geolocationAPI = navigator.geolocation;
+  const getUserCoordinates = () => {
+    console.log("geo location");
+    if (!geolocationAPI) {
+      // alert("Geolocation API is not available in your browser!");
+    } else {
+      geolocationAPI.getCurrentPosition(
+        (position) => {
+          const { coords } = position;
+          const url = "http://127.0.0.1:8000/accounts/location/";
+          try {
+            axios.post(
+              `${url}`,
+              {
+                email: response.data.email ? response.data.email : "",
+                longitude: coords.longitude,
+                latitude: coords.latitude,
+              },
+              {
+                headers: {
+                  "Content-type": "application/json",
+                },
+              }
+            );
+          } catch (err) {
+            // alert("error occured");
+            console.log(err);
+          }
+        },
+        (error) => {
+          // console.log(error);
+          alert(error.message);
+        }
+      );
+    }
+  };
+
+  useEffect(() => {
+    getUserCoordinates();
+  }, []);
+
   return (
     <div className="headerContainer">
       <div className="profile">
@@ -46,7 +93,7 @@ const Header = () => {
               : profileInfo.fname + " " + profileInfo.lname}
           </h2>
           <h4 className="date">
-            Joined since : {response ? jsdate() : `Saturday, 12th june 2023`}
+            Joined on : {response ? jsdate() : `Saturday, 12th june 2023`}
           </h4>
           <button className="editbutton">Edit Profile</button>
         </div>
@@ -54,16 +101,14 @@ const Header = () => {
       <div className="lastUpdate">
         <div className="updateBox">
           <div className="updateText">
-            <UpdateIcon />
+            <button className="refresh" onClick={getUserCoordinates}>
+              <UpdateIcon className="updateIcon" />
+            </button>
             <h4>Location Last Updated:</h4>
           </div>
           <div className="data">
-            <div className="updateDate">
-              {response ? response.data.created_at : "12:30am "}
-            </div>
-            {/* <div className="updateTime">12:30pm</div> */}
+            <div className="updateDate">{response ? update() : "12:30am "}</div>
           </div>
-          <div className="updateButton"></div>
         </div>
       </div>
     </div>

@@ -1,10 +1,9 @@
 import React from "react";
 import "./Sidebar.css";
-import PaymentIcon from "@mui/icons-material/Payment";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import HistoryIcon from "@mui/icons-material/History";
-import RedeemIcon from "@mui/icons-material/Redeem";
-import SettingsIcon from "@mui/icons-material/Settings";
+import HomeIcon from "@mui/icons-material/Home";
+
 const Sidebar = () => {
   return (
     <div>
@@ -15,22 +14,14 @@ const Sidebar = () => {
         </div>
         <ul className="list">
           <button className="listItem">
-            <PaymentIcon className="icon" />
-            Payment
+            <HomeIcon className="icon" disabled />
+            Home
           </button>
           <button className="listItem">
             <HistoryIcon className="icon" />
             History
           </button>
-          <button className="listItem">
-            <RedeemIcon className="icon" />
-            My Rewards
-          </button>
-          <button className="listItem">
-            <SettingsIcon className="icon" />
-            Settings
-          </button>
-          <button className="listItem signout">
+          <button className="signout">
             <ExitToAppIcon className="icon signoutIcon" />
             Sign out
           </button>
