@@ -7,6 +7,8 @@ import axios from "axios";
 import { useNavigate } from "react-router";
 import { useEffect } from "react";
 import { Update } from "@mui/icons-material";
+import { toast } from "react-toastify";
+
 const Header = ({ user_id }) => {
   // dummy data
   const profileInfo = {
@@ -65,14 +67,15 @@ const Header = ({ user_id }) => {
                 },
               }
             );
+            toast.success("Location Updated");
           } catch (err) {
-            // alert("error occured");
+            toast.error("Location didn't update");
             console.log(err);
           }
         },
         (error) => {
           // console.log(error);
-          alert(error.message);
+          toast.error(error.message);
         }
       );
     }
