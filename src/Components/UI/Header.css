@@ -5,6 +5,7 @@
     justify-content: space-between;
     width: 78vw;
     flex-wrap: wrap;
+    margin-left: 280px;
 }
 .profileImage{
     width: 10vw;

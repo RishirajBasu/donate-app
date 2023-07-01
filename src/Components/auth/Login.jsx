@@ -58,8 +58,10 @@ const Login = () => {
       }
 
       toast.success("Logged in successfully!");
+      console.log(data);
       localStorage.setItem("refresh", data.token.refresh);
       localStorage.setItem("access", data.token.access);
+      navigate("/", { state: { user_id: data.data.user_id } });
     } catch (error) {
       console.log(error);
       if (error.response.status === 400) {

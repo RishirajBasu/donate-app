@@ -5,7 +5,6 @@ import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import HistoryIcon from "@mui/icons-material/History";
 import RedeemIcon from "@mui/icons-material/Redeem";
 import SettingsIcon from "@mui/icons-material/Settings";
-import GroupAddIcon from "@mui/icons-material/GroupAdd";
 const Sidebar = () => {
   return (
     <div>
@@ -30,10 +29,6 @@ const Sidebar = () => {
           <button className="listItem">
             <SettingsIcon className="icon" />
             Settings
-          </button>
-          <button className="listItem">
-            <GroupAddIcon className="icon" />
-            Invite a Friend
           </button>
           <button className="listItem signout">
             <ExitToAppIcon className="icon signoutIcon" />
