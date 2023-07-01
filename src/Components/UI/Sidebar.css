@@ -16,6 +16,7 @@
     flex-direction: column;
     flex-wrap: nowrap;
     height: 100vh;
+    z-index: 1000;
 }
 
 .sidebar .list {
@@ -36,7 +37,7 @@
     font-weight: bolder;
     border: none; 
 }
-.logo button{
+.logo .beDonor{
     margin-top: 20px;
     color: #850000;
     text-align: center;
@@ -46,6 +47,12 @@
     border-radius: 80px;
     background-color: white;
     border: none;
+    transition: 90ms ease-in;
+}
+.logo .beDonor:hover{
+        color: antiquewhite;
+        background-color: rgba(255, 255, 255, 0.383);
+        cursor: pointer;
 }
 .sidebar .listItem {
     width: 15vw;
@@ -78,6 +85,7 @@
         color:antiquewhite;
         border-radius: 20px;
         background-color: rgba(255, 255, 255, 0.383);
+        cursor: pointer;
 }
 .signout {
     margin-top: 90px !important;

@@ -76,9 +76,15 @@
 .editbutton:hover{
     background-color: #640303;
         color: antiquewhite;
+        cursor: pointer;
 }
 .profileContent{
     display: flex;
     flex-direction: column;
     justify-content: center;
+    margin: 10px;
+}
+.date{
+    margin-left:10px;
+    color: rgba(0, 0, 0, 0.502);
 }

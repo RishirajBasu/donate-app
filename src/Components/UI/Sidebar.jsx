@@ -11,7 +11,7 @@ const Sidebar = () => {
       <div className="sidebar">
         <div className="logo">
           <h1>Donate</h1>
-          <button>Be a Donor!</button>
+          <button className="beDonor">Be a Donor!</button>
         </div>
         <ul className="list">
           <button className="listItem">

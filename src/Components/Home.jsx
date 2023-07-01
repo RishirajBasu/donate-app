@@ -1,3 +1,5 @@
+// reciever's view
+
 import React from "react";
 import "./Home.css";
 import Header from "./UI/Header";
