@@ -24,7 +24,6 @@ const Request = () => {
     number: "",
     unit: "",
     urgent: "",
-   
   };
 
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
@@ -50,8 +49,7 @@ const Request = () => {
         values.reason === "" ||
         values.number === "" ||
         values.unit === "" ||
-        values.urgent === "" 
-
+        values.urgent === ""
       ) {
         // alert("Kindly fill the Form properly");
         toast.warn("Kindly fill the form properly");
@@ -99,72 +97,75 @@ const Request = () => {
   return (
     <div>
       <Wapper>
-        <Container_left>
-          <h1> Donate </h1>
-        </Container_left>
-        <Container_right className="container_right sign-up">
-          <div className="form-container sign-up">
-            <div className="signup_text">
+        <Container_right className="container_right request-form">
+          <div className="form-container request-form">
+            <div className="signup_text request-form">
               <div className="auth-heading">
-                <p>Request for Donner</p>
+                <p>Request for Donor</p>
               </div>
             </div>
             <form onSubmit={handleSubmit} autoComplete="off">
-              {/* name */}
-              <div className="name_container">
-                {/* FirstName */}
-                <div className="form-group">
-                  <label htmlFor="fname" className="input-label">
-                    First Name{" "}
-                  </label>
-                  <input
-                    type="text"
-                    name="fname"
-                    id="fname"
-                    autoComplete="off"
-                    placeholder="Enter your First Name"
-                    value={values.fname}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    className="class_fname"
-                  />
-                  {errors.fname && touched.fname ? (
-                    <div className="errors">
-                      <p>{errors.fname}</p>
-                    </div>
-                  ) : null}
-                </div>
-
-                {/* LastName */}
-                <div className="form-group">
-                  <label htmlFor="lname" className="input-label">
-                    Last Name{" "}
-                  </label>
-                  <input
-                    type="text"
-                    name="lname"
-                    id="lname"
-                    autoComplete="off"
-                    placeholder="Enter your Last Name"
-                    value={values.lname}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                  />
-                  {errors.lname && touched.lname ? (
-                    <div className="errors">
-                      <p>{errors.lname}</p>
-                    </div>
-                  ) : null}
-                </div>
+              {/* Type of Donation */}
+              <div className="form-group">
+                <label htmlFor="type_of_donation" className="input-label">
+                  Type of Donation{" "}
+                </label>
+                <select
+                  type="date"
+                  name="type_of_donation"
+                  id="type_of_donation"
+                  autoComplete="off"
+                  placeholder="Required On"
+                  value={values.require_on}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                >
+                  <option value="blood">Blood</option>
+                  <option value="plasma">Plasma</option>
+                </select>
+                {errors.require_on && touched.require_on ? (
+                  <div className="errors">
+                    <p>{errors.require_on}</p>
+                  </div>
+                ) : null}
               </div>
-
-              {/* Required On On */}
+              {/* Blood Group */}
+              <div className="form-group">
+                <label htmlFor="blood_group" className="input-label">
+                  Blood Group{" "}
+                </label>
+                <select
+                  type="date"
+                  name="blood_group"
+                  id="blood_group"
+                  autoComplete="off"
+                  placeholder="Required On"
+                  value={values.require_on}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                >
+                  <option value="A+">A+</option>
+                  <option value="B+">B+</option>
+                  <option value="O+">O+</option>
+                  <option value="AB+">AB+</option>
+                  <option value="A-">A-</option>
+                  <option value="B-">B-</option>
+                  <option value="O-">O-</option>
+                  <option value="AB-">AB-</option>
+                </select>
+                {errors.require_on && touched.require_on ? (
+                  <div className="errors">
+                    <p>{errors.require_on}</p>
+                  </div>
+                ) : null}
+              </div>
+              {/* Required On */}
               <div className="form-group">
                 <label htmlFor="require_on" className="input-label">
                   Required On{" "}
                 </label>
                 <input
-                  type="text"
+                  type="date"
                   name="require_on"
                   id="require_on"
                   autoComplete="off"
@@ -179,29 +180,6 @@ const Request = () => {
                   </div>
                 ) : null}
               </div>
-              {/*Reason */}
-              <div className="form-group">
-                <label htmlFor="reason" className="input-label">
-                Reason{" "}
-                </label>
-                <input
-                  type="text"
-                  name="reason"
-                  id="reason"
-                  autoComplete="off"
-                  placeholder="Why you need it "
-                  value={values.reason}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                />
-                {errors.reason && touched.reason ? (
-                  <div className="errors">
-                    <p>{errors.reason}</p>
-                  </div>
-                ) : null}
-              </div>
-
-              
               {/* Number of Units */}
               <div className="form-group">
                 <label htmlFor="unit" className="input-label">
@@ -212,7 +190,7 @@ const Request = () => {
                   name="unit"
                   id="unit"
                   autoComplete="off"
-                  placeholder="Enter your Phone Number"
+                  placeholder="Enter Number of Units"
                   value={values.unit}
                   onChange={handleChange}
                   onBlur={handleBlur}
@@ -227,7 +205,7 @@ const Request = () => {
               {/* Phone Number  */}
               <div className="form-group">
                 <label htmlFor="number" className="input-label">
-                  Phone Number {" "}
+                  Phone Number{" "}
                 </label>
                 <input
                   type="number"
@@ -245,24 +223,42 @@ const Request = () => {
                   </div>
                 ) : null}
               </div>
-
-              
-              {/* Urgent Box */}
+              {/*Reason */}
               <div className="form-group">
+                <label htmlFor="reason" className="input-label">
+                  Reason (Optional)
+                </label>
+                <textarea
+                  type="text"
+                  name="reason"
+                  id="reason"
+                  autoComplete="off"
+                  placeholder="Why you need it?"
+                  value={values.reason}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  rows={6}
+                />
+                {errors.reason && touched.reason ? (
+                  <div className="errors">
+                    <p>{errors.reason}</p>
+                  </div>
+                ) : null}
+              </div>
+
+              {/* Urgent Box */}
+              <div className="checkbox-group">
                 <label htmlFor="urgent" className="input-label">
-                  Is Uegent{" "}
+                  Emergency Requirement{" "}
                 </label>
                 <input
                   type="checkbox"
                   name="urgent"
                   id="urgent"
-                  autoComplete="off"
-                  // placeholder="Confirm your Password"
                   value={values.urgent}
                   onChange={handleChange}
                   onBlur={handleBlur}
                 />
-                
               </div>
 
               <div className="buttons">
@@ -274,8 +270,6 @@ const Request = () => {
                   }}
                 />
               </div>
-
-              
             </form>
           </div>
         </Container_right>
@@ -310,4 +304,4 @@ const Container_left = styled.div`
 
 const Container_right = styled.div``;
 
-export default  Request;
+export default Request;

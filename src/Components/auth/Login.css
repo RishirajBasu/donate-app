@@ -25,7 +25,9 @@
   margin: 8px 0;
 }
 
-.form-container input {
+.form-container input,
+textarea,
+select {
   border: none;
   outline: none;
   border-radius: 6px;
@@ -43,12 +45,10 @@
   border: 1px solid #850000;
 }
 
-
 .errors {
   color: red;
   font-size: 0.7rem;
 }
-
 
 .input-button {
   width: 100%;
@@ -83,6 +83,6 @@
   text-decoration: underline;
 }
 
-.container_right.login::-webkit-scrollbar{
+.container_right.login::-webkit-scrollbar {
   display: none;
 }
