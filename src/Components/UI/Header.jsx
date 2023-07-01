@@ -8,7 +8,7 @@ import { useNavigate } from "react-router";
 import { useEffect } from "react";
 import { Update } from "@mui/icons-material";
 import { toast } from "react-toastify";
-
+import "react-toastify/dist/ReactToastify.css";
 const Header = ({ user_id }) => {
   // dummy data
   const profileInfo = {
@@ -27,7 +27,11 @@ const Header = ({ user_id }) => {
         setResponse(data);
         console.log(data);
       } catch (error) {
-        alert("Error fetching Data", error);
+        if (error.response.status === 400) {
+          toast.error(error.response.data.message);
+        } else {
+          toast.error("something went wrong.Kindly re-enter the form");
+        }
       }
     };
     fetchdata();
@@ -67,10 +71,14 @@ const Header = ({ user_id }) => {
                 },
               }
             );
-            toast.success("Location Updated");
-          } catch (err) {
-            toast.error("Location didn't update");
-            console.log(err);
+          } catch (error) {
+            // alert("error occured");
+            console.log(error);
+            if (error.response.status === 400) {
+              toast.error(error.response.data.message);
+            } else {
+              toast.error("something went wrong.Kindly re-enter the form");
+            }
           }
         },
         (error) => {
