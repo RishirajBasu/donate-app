@@ -13,12 +13,18 @@ import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import LoopIcon from "@mui/icons-material/Loop";
+import LoadingButton from "./UI/LoadingButton";
 import { RadioButtonUncheckedSharp } from "@mui/icons-material";
 const Home = () => {
+  const sidebarProp = {
+    home: true,
+    rewards: false,
+    history: true,
+  };
   const location = useLocation();
   const user_id = location.state.user_id;
   const [value, setValue] = useState("1");
-
+  const [loading, setLoading] = useState(false);
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -26,7 +32,7 @@ const Home = () => {
     <div className="homeContainer">
       <div className="homeLeft">
         <div className="sidebarComponent">
-          <Sidebar />
+          <Sidebar {...sidebarProp} />
         </div>
       </div>
       <div className="homeRight">
@@ -36,7 +42,7 @@ const Home = () => {
         </div>
         <div className="donor">
           <div className="submitRequest">
-            <button>New Request</button>
+            <LoadingButton text={"Submit Request"} loading={loading} />
           </div>
           <div className="donorList">
             {/* MUI Multi Tab code */}

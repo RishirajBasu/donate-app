@@ -7,11 +7,12 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
-const Sidebar = () => {
+import { useNavigate } from "react-router-dom";
+import WorkspacePremiumIcon from "@mui/icons-material/WorkspacePremium";
+const Sidebar = ({ home, rewards, history }) => {
+  const navigate = useNavigate();
   const access = localStorage.getItem("access");
   const refresh = localStorage.getItem("refresh");
-  // const [loading, setLoading] = useState(false);
-  // setLoading(false);
   const url = "http://127.0.0.1:8000/accounts/logout/";
   const signOut = async () => {
     try {
@@ -28,6 +29,7 @@ const Sidebar = () => {
         }
       );
       toast.success("Signed out successfully");
+      navigate("/login");
     } catch (error) {
       console.log(error);
       if (error.response.status === 400) {
@@ -37,6 +39,7 @@ const Sidebar = () => {
       }
     }
   };
+
   return (
     <div>
       <div className="sidebar">
@@ -45,14 +48,40 @@ const Sidebar = () => {
           <button className="beDonor">Be a Donor!</button>
         </div>
         <ul className="list">
-          <button className="listItem">
-            <HomeIcon className="icon" disabled />
-            Home
-          </button>
-          <button className="listItem">
-            <HistoryIcon className="icon" />
-            History
-          </button>
+          {home && (
+            <button
+              className="listItem"
+              onClick={() => {
+                navigate("/");
+              }}
+            >
+              <HomeIcon className="icon" />
+              Home
+            </button>
+          )}
+
+          {history && (
+            <button
+              className="listItem"
+              onClick={() => {
+                navigate("/history");
+              }}
+            >
+              <HistoryIcon className="icon" />
+              History
+            </button>
+          )}
+          {rewards && (
+            <button
+              className="listItem"
+              onClick={() => {
+                navigate("/rewards");
+              }}
+            >
+              <WorkspacePremiumIcon className="icon" />
+              Rewards
+            </button>
+          )}
           <button className="signout" onClick={signOut}>
             <ExitToAppIcon className="icon signoutIcon" />
             Sign out
