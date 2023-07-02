@@ -23,7 +23,7 @@ const Header = () => {
       if (error.response.status === 400) {
         toast.error(error.response.data.message);
       } else {
-        toast.error("something went wrong.Kindly re-enter the form");
+        toast.error("Something went wrong!");
       }
     }
   };
@@ -66,12 +66,11 @@ const Header = () => {
             if (error.response.status === 400) {
               toast.error(error.response.data.message);
             } else {
-              toast.error("something went wrong.Kindly re-enter the form");
+              toast.error("Something went wrong!");
             }
           }
         },
         (error) => {
-          // console.log(error);
           toast.error(error.message);
         }
       );
@@ -80,12 +79,15 @@ const Header = () => {
 
   useEffect(() => {
     const user_id = localStorage.getItem("user_id");
+    if (user_id === null) return;
     fetchdata(user_id);
   }, []);
 
   useEffect(() => {
     if (response === null) return;
-    getUserCoordinates();
+    if (response.data.coordinates === null) {
+      getUserCoordinates();
+    }
   }, [response]);
 
   return (

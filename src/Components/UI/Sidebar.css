@@ -8,7 +8,7 @@
   background-color: #850000;
   padding: 20px;
   box-sizing: border-box;
-  border-radius: 0px 50px 50px 0px;
+  /* border-radius: 0px 50px 50px 0px; */
   position: fixed;
   display: flex;
   flex-direction: column;

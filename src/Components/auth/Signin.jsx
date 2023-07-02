@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { styled } from "styled-components";
 import "./Signin.css";
 import { useFormik } from "formik";
@@ -41,6 +41,35 @@ const Signin = () => {
     });
 
   const URL = "http://localhost:8000";
+  const token = localStorage.getItem("access");
+
+  const access = async () => {
+    if (token !== null) {
+      console.log(`Access Token ${token}`);
+      try {
+        await axios.post(
+          `${URL}/accounts/token/verify/`,
+          {
+            token: token,
+          },
+          {
+            headers: {
+              "Content-type": "application/json",
+            },
+          }
+        );
+        navigate("/");
+      } catch (error) {
+        if (error.response.status === 401) {
+          toast.error("Please login again!");
+          navigate("/login");
+        }
+      }
+    } else {
+      toast.error("Please login again!");
+      navigate("/login");
+    }
+  };
 
   const registerUser = async (values) => {
     try {
@@ -100,11 +129,15 @@ const Signin = () => {
       } else if (error.response.status === 404) {
         navigate("/error");
       } else {
-        toast.error("something went wrong.Kindly re-enter the form");
+        toast.error("Something went wrong!");
       }
     }
     setLoading(false);
   };
+
+  useEffect(() => {
+    access();
+  }, []);
 
   return (
     <div>

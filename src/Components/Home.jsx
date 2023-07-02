@@ -18,6 +18,7 @@ import { RadioButtonUncheckedSharp } from "@mui/icons-material";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -38,23 +39,25 @@ const Home = () => {
   const fetchdata = async (user_id) => {
     try {
       let data = await axios.get(`${url}/accounts/profile/${user_id}`);
-      console.log(data);
+      // console.log(data);
       if (!data.data.is_verified) {
-        navigate("./otp");
+        toast.error("Please verify your email first!");
+        navigate("./login");
       }
     } catch (error) {
       if (error.data.status === 400) {
         toast.error(error.data.data.message);
       } else {
-        toast.error("something went wrong.Kindly re-enter the form");
+        toast.error("Something went wrong!");
       }
     }
   };
+
   const access = () => {
-    if (token) {
+    if (token !== null) {
       console.log(`Access Token ${token}`);
       try {
-        let { data } = axios.post(
+        axios.post(
           `${url}/accounts/token/verify/`,
           {
             token: token,
@@ -65,21 +68,22 @@ const Home = () => {
             },
           }
         );
-        console.log("hey you are in");
-        navigate("/");
       } catch (error) {
         if (error.response.status === 401) {
           console.log("error 401 bro");
-          navigate("/otp");
+          toast.error("Please login again!");
+          navigate("/login");
         }
       }
     } else {
+      toast.error("Please login again!");
       navigate("/login");
     }
   };
   useEffect(() => {
-    fetchdata(user_id);
     access();
+
+    // fetchdata(user_id);
   }, []);
 
   return (
