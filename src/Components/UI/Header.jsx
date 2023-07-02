@@ -4,7 +4,6 @@ import profileimage from "../Assets/profile.png";
 import { useState } from "react";
 import UpdateIcon from "@mui/icons-material/Update";
 import axios from "axios";
-import { useNavigate } from "react-router";
 import { useEffect } from "react";
 import { Update } from "@mui/icons-material";
 import { toast } from "react-toastify";

@@ -16,8 +16,12 @@ import LoopIcon from "@mui/icons-material/Loop";
 import LoadingButton from "./UI/LoadingButton";
 import { RadioButtonUncheckedSharp } from "@mui/icons-material";
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Home = () => {
+  const navigate = useNavigate();
+  const user_id = localStorage.getItem("user_id");
   const sidebarProp = {
     home: true,
     rewards: false,
@@ -29,8 +33,54 @@ const Home = () => {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-
-  // useEffect(() => {
+  const url = `http://127.0.0.1:8000`;
+  const token = localStorage.getItem("access");
+  const fetchdata = async (user_id) => {
+    try {
+      let data = await axios.get(`${url}/accounts/profile/${user_id}`);
+      console.log(data);
+      if (!data.data.is_verified) {
+        navigate("./otp");
+      }
+    } catch (error) {
+      if (error.data.status === 400) {
+        toast.error(error.data.data.message);
+      } else {
+        toast.error("something went wrong.Kindly re-enter the form");
+      }
+    }
+  };
+  const access = () => {
+    if (token) {
+      console.log(`Access Token ${token}`);
+      try {
+        let { data } = axios.post(
+          `${url}/accounts/token/verify/`,
+          {
+            token: token,
+          },
+          {
+            headers: {
+              "Content-type": "application/json",
+            },
+          }
+        );
+        console.log("hey you are in");
+        navigate("/");
+      } catch (error) {
+        if (error.response.status === 401) {
+          console.log("error 401 bro");
+          navigate("/otp");
+        }
+      }
+    } else {
+      navigate("/login");
+    }
+  };
+  useEffect(() => {
+    fetchdata(user_id);
+    access();
+  }, []);
 
   return (
     <div className="homeContainer">
