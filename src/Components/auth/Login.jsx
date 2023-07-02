@@ -74,7 +74,7 @@ const Login = () => {
         }
       );
 
-      if (data.data.is_verified === false) {
+      if (!data.data.is_verified) {
         toast.warn("Please verify your email!");
         navigate("/otp", { state: { email: values.email } });
         return;
