@@ -24,7 +24,6 @@ const Home = () => {
     history: true,
   };
   const location = useLocation();
-  const user_id = location.state.user_id;
   const [value, setValue] = useState("1");
   const [loading, setLoading] = useState(false);
   const handleChange = (event, newValue) => {
@@ -43,7 +42,7 @@ const Home = () => {
       <div className="homeRight">
         <div className="headerComponent">
           {/* */}
-          <Header user_id={user_id} />
+          <Header />
         </div>
         <div className="donor">
           <div className="submitRequest">

@@ -10,13 +10,13 @@ import { Update } from "@mui/icons-material";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const Header = ({ user_id }) => {
+const Header = () => {
   // get request to udpateprofile api
   const [response, setResponse] = useState(null);
 
   const url = `http://127.0.0.1:8000`;
 
-  const fetchdata = async () => {
+  const fetchdata = async (user_id) => {
     try {
       let data = await axios.get(`${url}/accounts/profile/${user_id}`);
       setResponse(data);
@@ -80,7 +80,8 @@ const Header = ({ user_id }) => {
   };
 
   useEffect(() => {
-    fetchdata();
+    const user_id = localStorage.getItem("user_id");
+    fetchdata(user_id);
   }, []);
 
   useEffect(() => {
