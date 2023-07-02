@@ -9,6 +9,7 @@ import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import WorkspacePremiumIcon from "@mui/icons-material/WorkspacePremium";
+
 const Sidebar = ({ home, rewards, history }) => {
   const navigate = useNavigate();
   const access = localStorage.getItem("access");
@@ -29,7 +30,9 @@ const Sidebar = ({ home, rewards, history }) => {
         }
       );
       toast.success("Signed out successfully");
-      navigate("/login");
+      localStorage.clear();
+
+      navigate("/login", { replace: true });
     } catch (error) {
       console.log(error);
       if (error.response.status === 400) {

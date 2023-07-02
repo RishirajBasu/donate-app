@@ -15,6 +15,8 @@ import LocationOnIcon from "@mui/icons-material/LocationOn";
 import LoopIcon from "@mui/icons-material/Loop";
 import LoadingButton from "./UI/LoadingButton";
 import { RadioButtonUncheckedSharp } from "@mui/icons-material";
+import { useEffect } from "react";
+
 const Home = () => {
   const sidebarProp = {
     home: true,
@@ -28,6 +30,9 @@ const Home = () => {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+
+  // useEffect(() => {
+
   return (
     <div className="homeContainer">
       <div className="homeLeft">
