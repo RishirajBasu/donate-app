@@ -29,8 +29,8 @@ const Sidebar = ({ home, rewards, history }) => {
           },
         }
       );
-      toast.success("Signed out successfully");
       localStorage.clear();
+      toast.success("Signed out successfully");
 
       navigate("/login", { replace: true });
     } catch (error) {
@@ -38,7 +38,7 @@ const Sidebar = ({ home, rewards, history }) => {
       if (error.response.status === 400) {
         toast.error(error.response.data.message);
       } else {
-        toast.error("something went wrong");
+        toast.error("Something went wrong");
       }
     }
   };

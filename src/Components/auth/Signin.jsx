@@ -60,14 +60,8 @@ const Signin = () => {
         );
         navigate("/");
       } catch (error) {
-        if (error.response.status === 401) {
-          toast.error("Please login again!");
-          navigate("/login");
-        }
+        console.log(error);
       }
-    } else {
-      toast.error("Please login again!");
-      navigate("/login");
     }
   };
 

@@ -53,11 +53,11 @@ const Home = () => {
     }
   };
 
-  const access = () => {
+  const access = async () => {
     if (token !== null) {
       console.log(`Access Token ${token}`);
       try {
-        axios.post(
+        await axios.post(
           `${url}/accounts/token/verify/`,
           {
             token: token,
@@ -70,13 +70,12 @@ const Home = () => {
         );
       } catch (error) {
         if (error.response.status === 401) {
-          console.log("error 401 bro");
           toast.error("Please login again!");
           navigate("/login");
         }
       }
     } else {
-      toast.error("Please login again!");
+      toast.error("Please login first!");
       navigate("/login");
     }
   };
