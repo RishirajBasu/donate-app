@@ -1,0 +1,78 @@
+.homeContainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+
+.homeRight {
+  margin-left: 320px;
+}
+.donor {
+  display: flex;
+  justify-content: space-between;
+}
+.donorList {
+  width: 60%;
+}
+
+.submitRequest button {
+  margin: 20px;
+  margin-right: 56px;
+  padding: 18px 40px;
+  border: 2px solid red;
+  border-radius: 80px;
+  background-color: red;
+  text-align: center;
+  font-weight: 400;
+  font-size: larger;
+  color: #fff;
+  align-self: flex-start;
+  transition: all 0.3s ease;
+}
+.submitRequest button:hover {
+  color: red;
+  background-color: white;
+  cursor: pointer;
+}
+.loop {
+  color: #850000;
+  margin-left: auto;
+  cursor: pointer;
+  transition: 90ms ease-in;
+}
+.loop:hover {
+  color: #e40e0e;
+}
+
+.tabBox {
+  margin-top: 20px;
+  border-radius: 20px;
+  padding: 30px;
+  height: 55vh;
+  border: 2px solid rgba(0, 0, 0, 0.251);
+  overflow: scroll;
+}
+.tabBox::-webkit-scrollbar {
+  display: none;
+}
+.detailbox {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 12px;
+  /* margin: 20px; */
+}
+.donorDistance {
+  display: flex;
+  flex-direction: row;
+  margin-left: auto;
+  color: rgba(255, 0, 0, 0.77);
+}
+.donorName h2 {
+  color: rgba(255, 0, 0, 0.77);
+  border: none;
+  font-weight: 600 !important;
+  font-size: 1.1rem;
+}
+.donorAddress {
+  color: rgba(0, 0, 0, 0.354);
+}

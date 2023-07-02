@@ -83,6 +83,6 @@
   text-decoration: underline;
 }
 
-.container_right.login::-webkit-scrollbar{
+.container_right.login::-webkit-scrollbar {
   display: none;
 }

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { styled } from "styled-components";
 import "./Login.css";
 import { useFormik } from "formik";
@@ -20,7 +20,7 @@ const Login = () => {
       initialValues: initialvalues,
       validationSchema: signinSchema,
       onSubmit: (values, action) => {
-        console.log(values);
+        // console.log(values);
         action.resetForm();
       },
     });
@@ -28,6 +28,29 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const URL = "http://localhost:8000";
+  const token = localStorage.getItem("access");
+
+  const access = async () => {
+    if (token !== null) {
+      console.log(`Access Token ${token}`);
+      try {
+        await axios.post(
+          `${URL}/accounts/token/verify/`,
+          {
+            token: token,
+          },
+          {
+            headers: {
+              "Content-type": "application/json",
+            },
+          }
+        );
+        navigate("/");
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  };
 
   const loginUser = async (values) => {
     try {
@@ -58,16 +81,31 @@ const Login = () => {
       }
 
       toast.success("Logged in successfully!");
+
       localStorage.setItem("refresh", data.token.refresh);
       localStorage.setItem("access", data.token.access);
+      localStorage.setItem("user_id", data.data.user_id);
+
+      navigate("/", { state: { user_id: data.data.user_id } });
     } catch (error) {
       console.log(error);
-      toast.error("Something went wrong!");
+      if (error.response.status === 400) {
+        toast.error(error.response.data.message);
+      } else if (error.response.status === 404) {
+        navigate("/error");
+      } else {
+        toast.error("Something went wrong!");
+      }
     }
 
     setLoading(false);
   };
   // console.log(errors);
+
+  useEffect(() => {
+    access();
+  }, []);
+
   return (
     <div>
       <Wapper>

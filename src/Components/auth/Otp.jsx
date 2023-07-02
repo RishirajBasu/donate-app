@@ -36,7 +36,8 @@ const Otp = () => {
           }
         );
 
-        toast.success("User registred successfully");
+        toast.success("User verified successfully");
+        navigate("/login");
       }
     } catch (error) {
       if (error.response.status === 400) {
