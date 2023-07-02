@@ -59,8 +59,12 @@ const Login = () => {
 
       toast.success("Logged in successfully!");
       console.log(data);
+      // TODO: Check if the profile is verified or not. If not verified, then redirect to otp page
+
       localStorage.setItem("refresh", data.token.refresh);
       localStorage.setItem("access", data.token.access);
+      localStorage.setItem("user_id", data.data.user_id);
+
       navigate("/", { state: { user_id: data.data.user_id } });
     } catch (error) {
       console.log(error);

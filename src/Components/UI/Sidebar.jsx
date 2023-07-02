@@ -7,9 +7,13 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { replace } from "formik";
+
 const Sidebar = () => {
   const access = localStorage.getItem("access");
   const refresh = localStorage.getItem("refresh");
+  const navigate = useNavigate();
   // const [loading, setLoading] = useState(false);
   // setLoading(false);
   const url = "http://127.0.0.1:8000/accounts/logout/";
@@ -28,6 +32,9 @@ const Sidebar = () => {
         }
       );
       toast.success("Signed out successfully");
+      localStorage.clear();
+
+      navigate("/login", { replace: true });
     } catch (error) {
       console.log(error);
       if (error.response.status === 400) {

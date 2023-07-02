@@ -14,6 +14,7 @@ import TabPanel from "@mui/lab/TabPanel";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import LoopIcon from "@mui/icons-material/Loop";
 import { RadioButtonUncheckedSharp } from "@mui/icons-material";
+import { useEffect } from "react";
 const Home = () => {
   const location = useLocation();
   const user_id = location.state.user_id;
@@ -22,6 +23,9 @@ const Home = () => {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+
+  // useEffect(() => {
+
   return (
     <div className="homeContainer">
       <div className="homeLeft">
@@ -36,7 +40,7 @@ const Home = () => {
         </div>
         <div className="donor">
           <div className="submitRequest">
-            <button>New Request</button>
+            <button>New Donation Request</button>
           </div>
           <div className="donorList">
             {/* MUI Multi Tab code */}
