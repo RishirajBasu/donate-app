@@ -17,7 +17,7 @@ const Sidebar = ({ home, rewards, history }) => {
   const url = "http://127.0.0.1:8000/accounts/logout/";
   const signOut = async () => {
     try {
-      let data = await axios.post(
+      let { data } = await axios.post(
         `${url}`,
         {
           refresh_token: refresh,

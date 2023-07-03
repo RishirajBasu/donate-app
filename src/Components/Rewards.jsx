@@ -9,9 +9,7 @@ const Rewards = () => {
   };
   return (
     <div>
-      <div className="sidebar">
-        <Sidebar {...sidebarProp} />
-      </div>
+      <div className="sidebar">{/* <Sidebar {...sidebarProp} /> */}</div>
       <div className="header">
         <Header />
       </div>
