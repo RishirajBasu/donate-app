@@ -10,7 +10,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import WorkspacePremiumIcon from "@mui/icons-material/WorkspacePremium";
 
-const Sidebar = ({ home, rewards, history }) => {
+const Sidebar = ({ home, history, rewards, donor, active }) => {
   const navigate = useNavigate();
   const access = localStorage.getItem("access");
   const refresh = localStorage.getItem("refresh");
@@ -51,7 +51,26 @@ const Sidebar = ({ home, rewards, history }) => {
           <button className="beDonor">Be a Donor!</button>
         </div>
         <ul className="list">
-          {home && (
+          {home ? (
+            <button
+              className="listItem"
+              onClick={() => {
+                navigate("/");
+              }}
+              style={{
+                padding: active.padding,
+                border: active.border,
+                textAlign: active.textAlign,
+                color: active.color,
+                borderRadius: active.borderRadius,
+                backgroundColor: active.backgroundColor,
+                cursor: active.cursor,
+              }}
+            >
+              <HomeIcon className="icon" />
+              Home
+            </button>
+          ) : (
             <button
               className="listItem"
               onClick={() => {
@@ -63,7 +82,26 @@ const Sidebar = ({ home, rewards, history }) => {
             </button>
           )}
 
-          {history && (
+          {history ? (
+            <button
+              className="listItem"
+              onClick={() => {
+                navigate("/history");
+              }}
+              style={{
+                padding: active.padding,
+                border: active.border,
+                textAlign: active.textAlign,
+                color: active.color,
+                borderRadius: active.borderRadius,
+                backgroundColor: active.backgroundColor,
+                cursor: active.cursor,
+              }}
+            >
+              <HistoryIcon className="icon" />
+              History
+            </button>
+          ) : (
             <button
               className="listItem"
               onClick={() => {
@@ -74,17 +112,39 @@ const Sidebar = ({ home, rewards, history }) => {
               History
             </button>
           )}
-          {rewards && (
-            <button
-              className="listItem"
-              onClick={() => {
-                navigate("/rewards");
-              }}
-            >
-              <WorkspacePremiumIcon className="icon" />
-              Rewards
-            </button>
-          )}
+
+          {donor &&
+            (rewards ? (
+              <button
+                className="listItem"
+                onClick={() => {
+                  navigate("/rewards");
+                }}
+                style={{
+                  padding: active.padding,
+                  border: active.border,
+                  textAlign: active.textAlign,
+                  color: active.color,
+                  borderRadius: active.borderRadius,
+                  backgroundColor: active.backgroundColor,
+                  cursor: active.cursor,
+                }}
+              >
+                <WorkspacePremiumIcon className="icon" />
+                Rewards
+              </button>
+            ) : (
+              <button
+                className="listItem"
+                onClick={() => {
+                  navigate("/rewards");
+                }}
+              >
+                <WorkspacePremiumIcon className="icon" />
+                Rewards
+              </button>
+            ))}
+
           <button className="signout" onClick={signOut}>
             <ExitToAppIcon className="icon signoutIcon" />
             Sign out

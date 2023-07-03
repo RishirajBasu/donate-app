@@ -25,8 +25,18 @@ const Home = () => {
   const user_id = localStorage.getItem("user_id");
   const sidebarProp = {
     home: true,
+    history: false,
     rewards: false,
-    history: true,
+    donor: false,
+    active: {
+      padding: "20px",
+      border: "none",
+      textAlign: "center",
+      color: "white",
+      borderRadius: "20px",
+      backgroundColor: "rgba(255, 255, 255, 0.383)",
+      cursor: "pointer",
+    },
   };
   const location = useLocation();
   const [value, setValue] = useState("1");

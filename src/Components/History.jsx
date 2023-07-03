@@ -12,6 +12,20 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 
 const History = () => {
+  const sidebarProp = {
+    home: false,
+    history: true,
+    rewards: false,
+    active: {
+      padding: "20px",
+      border: "none",
+      textAlign: "center",
+      color: "white",
+      borderRadius: "20px",
+      backgroundColor: "rgba(255, 255, 255, 0.383)",
+      cursor: "pointer",
+    },
+  };
   function createData(name, calories, fat, carbs, protein) {
     return { name, calories, fat, carbs, protein };
   }
@@ -24,11 +38,7 @@ const History = () => {
     createData("Gingerbread", 356, 16.0, 49, 3.9),
   ];
   // reciever window
-  const sidebarProp = {
-    home: true,
-    rewards: false,
-    history: true,
-  };
+
   return (
     <div className="historyContainer">
       <div className="historyLeft">
