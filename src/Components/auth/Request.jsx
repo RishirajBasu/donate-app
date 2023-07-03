@@ -1,14 +1,24 @@
 import React, { useState } from 'react';
 import './Request.css'; // Import the CSS file for styling
+import { styled } from "styled-components";
+import { signinSchema } from "./Schema";
+import axios from "axios";
+
 
 const Request = () => {
+  const [requestedBy, setrequestedBy] = useState('');
   const [donationType, setDonationType] = useState('');
   const [bloodGroup, setBloodGroup] = useState('');
   const [requiredOn, setRequiredOn] = useState('');
+  const [PlaceOfDonation, setPlaceOfDonation] = useState('');
   const [numberOfUnits, setNumberOfUnits] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [reason, setReason] = useState('');
   const [emergencyRequirement, setEmergencyRequirement] = useState(false);
+
+  const handlerequestedByChange = (event) => {
+    setrequestedBy(event.target.value);
+  }
 
   const handleDonationTypeChange = (event) => {
     setDonationType(event.target.value);
@@ -21,7 +31,9 @@ const Request = () => {
   const handleRequiredOnChange = (event) => {
     setRequiredOn(event.target.value);
   };
-
+  const handlePlaceOfDonationChange = (event) => {
+    setPlaceOfDonation(event.target.value);
+  }
   const handleNumberOfUnitsChange = (event) => {
     setNumberOfUnits(event.target.value);
   };
@@ -38,13 +50,37 @@ const Request = () => {
     setEmergencyRequirement(event.target.checked);
   };
 
+  const handleApi = () =>{
+    console.log(requestedBy,bloodGroup,requiredOn)
+    axios.post('http://127.0.0.1:8000/donation/request/',{
+      requestedBy: requestedBy,
+      donationType: donationType,
+      bloodGroup: bloodGroup,
+      requiredOn: requiredOn,
+      PlaceOfDonation: PlaceOfDonation,
+      numberOfUnits: numberOfUnits,
+      phoneNumber: phoneNumber,
+      reason: reason,
+      emergencyRequirement: emergencyRequirement,
+
+    })
+    .then(result => {
+        console.log(result.data)
+    })
+    .catch(err => {
+      console.log(err)
+    })
+  }
+
   const handleSubmit = (event) => {
     event.preventDefault();
     // Handle form submission here
     console.log('Submitted:', {
+      requestedBy,
       donationType,
       bloodGroup,
       requiredOn,
+      PlaceOfDonation,
       numberOfUnits,
       phoneNumber,
       reason,
@@ -87,6 +123,26 @@ const Request = () => {
             type="date"
             value={requiredOn}
             onChange={handleRequiredOnChange}
+          />
+        </div>
+        
+        <div className="form-group">
+          <label htmlFor="requestedBy">Registration ID:</label>
+          <input
+            id="requestedBy"
+            type="number"
+            value={requestedBy}
+            onChange={handlerequestedByChange}
+          />
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="PlaceOfDonation">PlaceOfDonation:</label>
+          <input
+            id="PlaceOfDonation"
+            type="text"
+            value={PlaceOfDonation}
+            onChange={handlePlaceOfDonationChange}
           />
         </div>
 
