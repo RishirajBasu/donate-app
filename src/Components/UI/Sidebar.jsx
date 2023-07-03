@@ -86,7 +86,7 @@ const Sidebar = ({ home, historyDonor, rewards, donor, active }) => {
             <button
               className="listItem"
               onClick={() => {
-                navigate("/history");
+                navigate("/historyDonor");
               }}
               style={{
                 padding: active.padding,
@@ -105,7 +105,7 @@ const Sidebar = ({ home, historyDonor, rewards, donor, active }) => {
             <button
               className="listItem"
               onClick={() => {
-                navigate("/history");
+                navigate("/historyDonor");
               }}
             >
               <HistoryIcon className="icon" />
