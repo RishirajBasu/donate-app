@@ -1,7 +1,7 @@
 import React from "react";
 import Sidebar from "./UI/Sidebar";
 import Header from "./UI/Header";
-import "./History.css";
+import "./HistoryDonor.css";
 import { styled } from "@mui/material/styles";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -14,7 +14,7 @@ import Paper from "@mui/material/Paper";
 const History = () => {
   const sidebarProp = {
     home: false,
-    history: true,
+    historyDonor: true,
     rewards: false,
     active: {
       padding: "20px",
@@ -51,7 +51,7 @@ const History = () => {
         <div className="historyTable">
           <TableContainer component={Paper}>
             <Table
-              sx={{ minWidth: 650, borderRadius: "2000px" }}
+              sx={{ minWidth: 650 }}
               size="Large"
               aria-label="a dense table"
             >

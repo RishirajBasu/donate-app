@@ -10,7 +10,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import WorkspacePremiumIcon from "@mui/icons-material/WorkspacePremium";
 
-const Sidebar = ({ home, history, rewards, donor, active }) => {
+const Sidebar = ({ home, historyDonor, rewards, donor, active }) => {
   const navigate = useNavigate();
   const access = localStorage.getItem("access");
   const refresh = localStorage.getItem("refresh");
@@ -82,7 +82,7 @@ const Sidebar = ({ home, history, rewards, donor, active }) => {
             </button>
           )}
 
-          {history ? (
+          {historyDonor ? (
             <button
               className="listItem"
               onClick={() => {
