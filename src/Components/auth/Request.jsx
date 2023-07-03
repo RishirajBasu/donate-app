@@ -1,307 +1,134 @@
-import React, { useState } from "react";
-import { styled } from "styled-components";
-import "./Request.css";
-import { useFormik } from "formik";
-import { signinSchema } from "./Schema";
-import { useNavigate, Link } from "react-router-dom";
-import axios from "axios";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import "./Login";
-import "./Otp";
-import LoadingButton from "../UI/LoadingButton";
+import React, { useState } from 'react';
+import './Request.css'; // Import the CSS file for styling
 
 const Request = () => {
-  // this is used to navigate to different pages
-  const navigate = useNavigate();
-  const [loading, setLoading] = useState(false);
+  const [donationType, setDonationType] = useState('');
+  const [bloodGroup, setBloodGroup] = useState('');
+  const [requiredOn, setRequiredOn] = useState('');
+  const [numberOfUnits, setNumberOfUnits] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [reason, setReason] = useState('');
+  const [emergencyRequirement, setEmergencyRequirement] = useState(false);
 
-  const initialvalues = {
-    fname: "",
-    lname: "",
-    require_on: "",
-    reson: "",
-    number: "",
-    unit: "",
-    urgent: "",
+  const handleDonationTypeChange = (event) => {
+    setDonationType(event.target.value);
   };
 
-  const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
-    useFormik({
-      initialValues: initialvalues,
-      validationSchema: signinSchema,
-      validateOnChange: signinSchema,
-      validateOnBlur: signinSchema,
-      onSubmit: (values, action) => {
-        console.log(values);
-        action.resetForm();
-      },
+  const handleBloodGroupChange = (event) => {
+    setBloodGroup(event.target.value);
+  };
+
+  const handleRequiredOnChange = (event) => {
+    setRequiredOn(event.target.value);
+  };
+
+  const handleNumberOfUnitsChange = (event) => {
+    setNumberOfUnits(event.target.value);
+  };
+
+  const handlePhoneNumberChange = (event) => {
+    setPhoneNumber(event.target.value);
+  };
+
+  const handleReasonChange = (event) => {
+    setReason(event.target.value);
+  };
+
+  const handleEmergencyRequirementChange = (event) => {
+    setEmergencyRequirement(event.target.checked);
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    // Handle form submission here
+    console.log('Submitted:', {
+      donationType,
+      bloodGroup,
+      requiredOn,
+      numberOfUnits,
+      phoneNumber,
+      reason,
+      emergencyRequirement,
     });
-
-  const URL = "http://localhost:8000";
-
-  const registerUser = async (values) => {
-    try {
-      if (
-        values.fname === "" ||
-        values.lname === "" ||
-        values.require_on === "" ||
-        values.reason === "" ||
-        values.number === "" ||
-        values.unit === "" ||
-        values.urgent === ""
-      ) {
-        // alert("Kindly fill the Form properly");
-        toast.warn("Kindly fill the form properly");
-        return;
-      }
-
-      if (values.password !== values.confirm_password) {
-        toast.error("Password and Confirm Password should be same");
-        return;
-      }
-
-      setLoading(true);
-      let { data } = await axios.post(
-        `${URL}/accounts/register/`,
-        {
-          first_name: values.fname,
-          last_name: values.lname,
-          require_on: values.require_on,
-          reason: values.reason,
-          phone: values.number,
-          unit: values.unit,
-          urgent: values.urgent,
-        },
-        {
-          headers: {
-            "Content-type": "application/json",
-          },
-        }
-      );
-
-      toast.success("User registred successfully");
-
-      navigate("/otp", {
-        state: {
-          email: values.email,
-        },
-      });
-    } catch (error) {
-      console.log(error);
-      toast.error("Something went wrong!");
-    }
-    setLoading(false);
   };
 
   return (
-    <div>
-      <Wapper>
-        <Container_right className="container_right request-form">
-          <div className="form-container request-form">
-            <div className="signup_text request-form">
-              <div className="auth-heading">
-                <p>Request for Donor</p>
-              </div>
-            </div>
-            <form onSubmit={handleSubmit} autoComplete="off">
-              {/* Type of Donation */}
-              <div className="form-group">
-                <label htmlFor="type_of_donation" className="input-label">
-                  Type of Donation{" "}
-                </label>
-                <select
-                  type="date"
-                  name="type_of_donation"
-                  id="type_of_donation"
-                  autoComplete="off"
-                  placeholder="Required On"
-                  value={values.require_on}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                >
-                  <option value="blood">Blood</option>
-                  <option value="plasma">Plasma</option>
-                </select>
-                {errors.require_on && touched.require_on ? (
-                  <div className="errors">
-                    <p>{errors.require_on}</p>
-                  </div>
-                ) : null}
-              </div>
-              {/* Blood Group */}
-              <div className="form-group">
-                <label htmlFor="blood_group" className="input-label">
-                  Blood Group{" "}
-                </label>
-                <select
-                  type="date"
-                  name="blood_group"
-                  id="blood_group"
-                  autoComplete="off"
-                  placeholder="Required On"
-                  value={values.require_on}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                >
-                  <option value="A+">A+</option>
-                  <option value="B+">B+</option>
-                  <option value="O+">O+</option>
-                  <option value="AB+">AB+</option>
-                  <option value="A-">A-</option>
-                  <option value="B-">B-</option>
-                  <option value="O-">O-</option>
-                  <option value="AB-">AB-</option>
-                </select>
-                {errors.require_on && touched.require_on ? (
-                  <div className="errors">
-                    <p>{errors.require_on}</p>
-                  </div>
-                ) : null}
-              </div>
-              {/* Required On */}
-              <div className="form-group">
-                <label htmlFor="require_on" className="input-label">
-                  Required On{" "}
-                </label>
-                <input
-                  type="date"
-                  name="require_on"
-                  id="require_on"
-                  autoComplete="off"
-                  placeholder="Required On"
-                  value={values.require_on}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                />
-                {errors.require_on && touched.require_on ? (
-                  <div className="errors">
-                    <p>{errors.require_on}</p>
-                  </div>
-                ) : null}
-              </div>
-              {/* Number of Units */}
-              <div className="form-group">
-                <label htmlFor="unit" className="input-label">
-                  Number of Units{" "}
-                </label>
-                <input
-                  type="number"
-                  name="unit"
-                  id="unit"
-                  autoComplete="off"
-                  placeholder="Enter Number of Units"
-                  value={values.unit}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                />
-                {errors.unit && touched.unit ? (
-                  <div className="errors">
-                    <p>{errors.unit}</p>
-                  </div>
-                ) : null}
-              </div>
+    <div className="request-container">
+      <h1 className="request-heading">Request for Donor</h1>
+      <form className="request-form" onSubmit={handleSubmit}>
+        <div className="form-group">
+          <label htmlFor="donationType">Type of Donation:</label>
+          <select id="donationType" value={donationType} onChange={handleDonationTypeChange}>
+            <option value="">Select a donation type</option>
+            <option value="plasma">Plasma</option>
+            <option value="blood">Blood</option>
+          </select>
+        </div>
 
-              {/* Phone Number  */}
-              <div className="form-group">
-                <label htmlFor="number" className="input-label">
-                  Phone Number{" "}
-                </label>
-                <input
-                  type="number"
-                  name="number"
-                  id="number"
-                  autoComplete="off"
-                  placeholder="Enter your Phone Number"
-                  value={values.number}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                />
-                {errors.number && touched.number ? (
-                  <div className="errors">
-                    <p>{errors.number}</p>
-                  </div>
-                ) : null}
-              </div>
-              {/*Reason */}
-              <div className="form-group">
-                <label htmlFor="reason" className="input-label">
-                  Reason (Optional)
-                </label>
-                <textarea
-                  type="text"
-                  name="reason"
-                  id="reason"
-                  autoComplete="off"
-                  placeholder="Why you need it?"
-                  value={values.reason}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  rows={6}
-                />
-                {errors.reason && touched.reason ? (
-                  <div className="errors">
-                    <p>{errors.reason}</p>
-                  </div>
-                ) : null}
-              </div>
+        <div className="form-group">
+          <label htmlFor="bloodGroup">Blood Group:</label>
+          <select id="bloodGroup" value={bloodGroup} onChange={handleBloodGroupChange}>
+            <option value="">Select a blood group</option>
+            <option value="A+">A+</option>
+            <option value="B+">B+</option>
+            <option value="O+">O+</option>
+            <option value="AB+">AB+</option>
+            <option value="A-">A-</option>
+            <option value="B-">B-</option>
+            <option value="O-">O-</option>
+            <option value="AB-">AB-</option>
+          </select>
+        </div>
 
-              {/* Urgent Box */}
-              <div className="checkbox-group">
-                <label htmlFor="urgent" className="input-label">
-                  Emergency Requirement{" "}
-                </label>
-                <input
-                  type="checkbox"
-                  name="urgent"
-                  id="urgent"
-                  value={values.urgent}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                />
-              </div>
+        <div className="form-group">
+          <label htmlFor="requiredOn">Required On:</label>
+          <input
+            id="requiredOn"
+            type="date"
+            value={requiredOn}
+            onChange={handleRequiredOnChange}
+          />
+        </div>
 
-              <div className="buttons">
-                <LoadingButton
-                  text={"Send Request"}
-                  loading={loading}
-                  onClick={() => {
-                    registerUser(values);
-                  }}
-                />
-              </div>
-            </form>
-          </div>
-        </Container_right>
-      </Wapper>
+        <div className="form-group">
+          <label htmlFor="numberOfUnits">Number of Units:</label>
+          <input
+            id="numberOfUnits"
+            type="number"
+            value={numberOfUnits}
+            onChange={handleNumberOfUnitsChange}
+          />
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="phoneNumber">Phone Number:</label>
+          <input
+            id="phoneNumber"
+            type="number"
+            value={phoneNumber}
+            onChange={handlePhoneNumberChange}
+          />
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="reason">Reason:</label>
+          <textarea id="reason" value={reason} onChange={handleReasonChange} />
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="emergencyRequirement">Emergency Requirement:</label>
+          <input
+            id="emergencyRequirement"
+            type="checkbox"
+            checked={emergencyRequirement}
+            onChange={handleEmergencyRequirementChange}
+          />
+        </div>
+
+        <button type="submit" className="submit-button">Send Request</button>
+      </form>
     </div>
   );
 };
-
-const Wapper = styled.div`
-  margin: 0px;
-  border: none;
-  display: flex;
-  flex-direction: row;
-  height: 100vh;
-  scroll-behavior: smooth;
-`;
-
-const Container_left = styled.div`
-  background: #850000;
-  color: White;
-  border: 2px solid #850000;
-  width: 35vw;
-  height: 100vh;
-  text-align: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  h1 {
-    background-color: #850000;
-  }
-`;
-
-const Container_right = styled.div``;
 
 export default Request;

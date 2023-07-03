@@ -1,38 +1,46 @@
-.container_right.request-form {
-  /* height: 100vh; */
-  overflow-y: auto;
-  color: black;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  /* margin-top: 100px; */
+.request-container {
+  width: 400px;
+  margin: 0 auto;
+  /* background-color: antiquewhite; */
+  padding: 20px;
 }
 
-.form-container.request-form {
-  padding: 20px 0;
-  width: 500px;
-  padding-bottom: 50px;
+.request-heading {
+  text-align: center;
+  margin-bottom: 20px;
 }
 
-.form-group {
+.request-form .form-group {
   display: flex;
   flex-direction: column;
   gap: 4px;
   margin-bottom: 16px;
 }
 
-.signup_text.request-form {
-  margin-top: 300px;
-  margin-bottom: 20px;
+.request-form label {
+  display: block;
+  margin-bottom: 5px;
 }
 
-.checkbox-group {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-
-.form-group textarea {
+.request-form select,
+.request-form input[type="date"],
+.request-form input[type="number"],
+.request-form textarea {
+  width: 100%;
+  padding: 5px;
+  border: black;
   resize: vertical;
+}
+
+.request-form .submit-button {
+  width: 100%;
+  padding: 10px;
+  background-color: #850000;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+.request-form .submit-button:hover {
+  background-color: #e3293e;
 }
