@@ -6,6 +6,7 @@ import Otp from "./Components/auth/Otp";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import DonnerProfile from "./Components/DonnerProfile";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -18,6 +19,7 @@ function App() {
             <Route path="/signup" element={<Signin />} />
             <Route path="/login" element={<Login />} />
             <Route path="/otp" element={<Otp />} />
+            <Route path="/DonnerProfile" elemt={<DonnerProfile />} />
           </Routes>
         </BrowserRouter>
       </div>
