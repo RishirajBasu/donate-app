@@ -76,3 +76,7 @@
 .donorAddress {
   color: rgba(0, 0, 0, 0.354);
 }
+.refreshButton{
+  all: unset;
+ padding-left: 227px;
+}

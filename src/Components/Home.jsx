@@ -160,7 +160,12 @@ const Home = () => {
                   >
                     <Tab label="Nearby Donors" value="1" />
                     <Tab label="Blood-Banks" value="2" />
-                    <LoopIcon className="loop" fontSize="large" />
+                    <button
+                      className="refreshButton"
+                      onClick={fetchDonorData(user_id)}
+                    >
+                      <LoopIcon className="loop" fontSize="large" />
+                    </button>
                   </TabList>
                 </Box>
                 {/* the value 1 represents the tab in which the content is inserted which is tab 1 */}
