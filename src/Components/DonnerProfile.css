@@ -9,8 +9,64 @@
     border: none;
   
  }
+ .requestName{
+   display: flex;
+   flex-direction: column;
+   margin-left: 32px ;
+   
+ }
  .coloredBg:nth-child(even){
     background-color: #ffdcdccb;
  }
+ .accept-button {
+   background-color: green;
+   color: white;
+   padding: 10px 20px;
+   border: none;
+   border-radius: 5px;
+   cursor: pointer;
+   font-size: 16px;
+ }
  
+ .accept-button:hover {
+   background-color: darkgreen;
+ }
+ .nameBox{
+   margin: 3px;
+   padding: 11px;
+   border: none;
+   margin-right: 200px;
+ }
+ 
+ /* SideBox.css */
+.side-box {
+   background-color: rgb(255, 60, 0);
+   color: white;
+   padding: 20px;
+   text-align: center;
+ }
+ 
+ .level-text {
+   font-size: 18px;
+   font-weight: bold;
+   margin-bottom: 10px;
+ }
+ 
+ .level-details {
+   font-size: 30px;
+   color: goldenrod;
+ }
+ 
+ .progress-bar {
+   background-color: rgb(251, 251, 251);
+   height: 20px;
+   margin-top: 20px;
+   position: relative;
+ }
+ 
+ .progress-bar-fill {
+   background-color: rgb(241, 253, 0);
+   height: 100%;
+   width: 50%; /* Adjust the width based on the progress */
+ }
  
