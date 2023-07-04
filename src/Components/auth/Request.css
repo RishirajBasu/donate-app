@@ -44,3 +44,8 @@
 .request-form .submit-button:hover {
   background-color: #e3293e;
 }
+
+input,option{
+  background-color:#ffe4e4;
+  border-radius: 6px;
+}

@@ -5,7 +5,6 @@ import { signinSchema } from "./Schema";
 import axios from "axios";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
 const Request = () => {
   const [requestedBy, setrequestedBy] = useState("");
   const [donationType, setDonationType] = useState("");
@@ -154,7 +153,7 @@ const Request = () => {
         </div>
 
         <div className="form-group">
-          <label htmlFor="PlaceOfDonation">PlaceOfDonation:</label>
+          <label htmlFor="PlaceOfDonation">Place of Donation:</label>
           <input
             id="PlaceOfDonation"
             type="text"
