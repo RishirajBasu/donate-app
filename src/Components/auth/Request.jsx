@@ -1,24 +1,25 @@
-import React, { useState } from 'react';
-import './Request.css'; // Import the CSS file for styling
+import React, { useState } from "react";
+import "./Request.css"; // Import the CSS file for styling
 import { styled } from "styled-components";
 import { signinSchema } from "./Schema";
 import axios from "axios";
-
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Request = () => {
-  const [requestedBy, setrequestedBy] = useState('');
-  const [donationType, setDonationType] = useState('');
-  const [bloodGroup, setBloodGroup] = useState('');
-  const [requiredOn, setRequiredOn] = useState('');
-  const [PlaceOfDonation, setPlaceOfDonation] = useState('');
-  const [numberOfUnits, setNumberOfUnits] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState('');
-  const [reason, setReason] = useState('');
+  const [requestedBy, setrequestedBy] = useState("");
+  const [donationType, setDonationType] = useState("");
+  const [bloodGroup, setBloodGroup] = useState("");
+  const [requiredOn, setRequiredOn] = useState("");
+  const [PlaceOfDonation, setPlaceOfDonation] = useState("");
+  const [numberOfUnits, setNumberOfUnits] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [reason, setReason] = useState("");
   const [emergencyRequirement, setEmergencyRequirement] = useState(false);
 
   const handlerequestedByChange = (event) => {
     setrequestedBy(event.target.value);
-  }
+  };
 
   const handleDonationTypeChange = (event) => {
     setDonationType(event.target.value);
@@ -33,7 +34,7 @@ const Request = () => {
   };
   const handlePlaceOfDonationChange = (event) => {
     setPlaceOfDonation(event.target.value);
-  }
+  };
   const handleNumberOfUnitsChange = (event) => {
     setNumberOfUnits(event.target.value);
   };
@@ -50,32 +51,40 @@ const Request = () => {
     setEmergencyRequirement(event.target.checked);
   };
 
-  const handleApi = () =>{
-    console.log(requestedBy,bloodGroup,requiredOn)
-    axios.post('http://127.0.0.1:8000/donation/request/',{
-      requestedBy: requestedBy,
-      donationType: donationType,
-      bloodGroup: bloodGroup,
-      requiredOn: requiredOn,
-      PlaceOfDonation: PlaceOfDonation,
-      numberOfUnits: numberOfUnits,
-      phoneNumber: phoneNumber,
-      reason: reason,
-      emergencyRequirement: emergencyRequirement,
-
-    })
-    .then(result => {
-        console.log(result.data)
-    })
-    .catch(err => {
-      console.log(err)
-    })
-  }
+  const handleApi = () => {
+    console.log(requestedBy, bloodGroup, requiredOn);
+    try {
+      let { data } = axios.post(
+        "http://127.0.0.1:8000/donation/request/",
+        {
+          requestedBy: requestedBy,
+          donationType: donationType,
+          bloodGroup: bloodGroup,
+          requiredOn: requiredOn,
+          PlaceOfDonation: PlaceOfDonation,
+          numberOfUnits: numberOfUnits,
+          phoneNumber: phoneNumber,
+          reason: reason,
+          emergencyRequirement: emergencyRequirement,
+        },
+        {
+          headers: { "Content-type": "application/json" },
+        }
+      );
+    } catch (err) {
+      console.log(err);
+      if (err.response.status === 400) {
+        toast.error(err.response.data.message);
+      } else {
+        toast.error("Something went wrong");
+      }
+    }
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
     // Handle form submission here
-    console.log('Submitted:', {
+    console.log("Submitted:", {
       requestedBy,
       donationType,
       bloodGroup,
@@ -94,7 +103,11 @@ const Request = () => {
       <form className="request-form" onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="donationType">Type of Donation:</label>
-          <select id="donationType" value={donationType} onChange={handleDonationTypeChange}>
+          <select
+            id="donationType"
+            value={donationType}
+            onChange={handleDonationTypeChange}
+          >
             <option value="">Select a donation type</option>
             <option value="plasma">Plasma</option>
             <option value="blood">Blood</option>
@@ -103,7 +116,11 @@ const Request = () => {
 
         <div className="form-group">
           <label htmlFor="bloodGroup">Blood Group:</label>
-          <select id="bloodGroup" value={bloodGroup} onChange={handleBloodGroupChange}>
+          <select
+            id="bloodGroup"
+            value={bloodGroup}
+            onChange={handleBloodGroupChange}
+          >
             <option value="">Select a blood group</option>
             <option value="A+">A+</option>
             <option value="B+">B+</option>
@@ -125,7 +142,7 @@ const Request = () => {
             onChange={handleRequiredOnChange}
           />
         </div>
-        
+
         <div className="form-group">
           <label htmlFor="requestedBy">Registration ID:</label>
           <input
@@ -181,7 +198,9 @@ const Request = () => {
           />
         </div>
 
-        <button type="submit" className="submit-button">Send Request</button>
+        <button type="submit" className="submit-button" onClick={handleApi}>
+          Send Request
+        </button>
       </form>
     </div>
   );
