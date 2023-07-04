@@ -22,7 +22,6 @@ import { toast } from "react-toastify";
 
 const Home = () => {
   const navigate = useNavigate();
-  const user_id = localStorage.getItem("user_id");
   const sidebarProp = {
     home: true,
     historyReciever: false,
@@ -41,27 +40,29 @@ const Home = () => {
   const location = useLocation();
   const [value, setValue] = useState("1");
   const [loading, setLoading] = useState(false);
+  const [data, setData] = useState([]);
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
   const url = `http://127.0.0.1:8000`;
   const token = localStorage.getItem("access");
-  const fetchdata = async (user_id) => {
-    try {
-      let data = await axios.get(`${url}/accounts/profile/${user_id}`);
-      // console.log(data);
-      if (!data.data.is_verified) {
-        toast.error("Please verify your email first!");
-        navigate("./login");
-      }
-    } catch (error) {
-      if (error.data.status === 400) {
-        toast.error(error.data.data.message);
-      } else {
-        toast.error("Something went wrong!");
-      }
-    }
-  };
+  const user_id = localStorage.getItem("user_id");
+  // const fetchdata = async (user_id) => {
+  //   try {
+  //     let data = await axios.get(`${url}/accounts/profile/${user_id}`);
+  //     // console.log(data);
+  //     if (!data.data.is_verified) {
+  //       toast.error("Please verify your email first!");
+  //       navigate("./login");
+  //     }
+  //   } catch (error) {
+  //     if (error.data.status === 400) {
+  //       toast.error(error.data.data.message);
+  //     } else {
+  //       toast.error("Something went wrong!");
+  //     }
+  //   }
+  // };
 
   const access = async () => {
     if (token !== null) {
@@ -89,9 +90,40 @@ const Home = () => {
       navigate("/login");
     }
   };
+  const dummyNearbyDonor = [
+    {
+      donor_id: 9,
+      name: "Greg Ipe",
+      blood_group: "O+",
+      distance: 4.44,
+      count: 0,
+    },
+    {
+      donor_id: 9,
+      name: "Greg Ipe",
+      blood_group: "O+",
+      distance: 4.44,
+      count: 0,
+    },
+  ];
+  const fetchDonorData = async (user_id) => {
+    try {
+      const { data } = await axios.get(
+        `${url}/donor/profile`,
+        {
+          superuser_id: user_id,
+        },
+        { headers: { "Content-Type": "application/json" } }
+      );
+      setData(data);
+      console.log("Dataaa", data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   useEffect(() => {
+    fetchDonorData(user_id);
     access();
-
     // fetchdata(user_id);
   }, []);
 
@@ -133,41 +165,92 @@ const Home = () => {
                 </Box>
                 {/* the value 1 represents the tab in which the content is inserted which is tab 1 */}
                 <TabPanel value="1">
-                  <div className="donorContainer">
-                    {/* donor 1 */}
-                    <div className="detailbox">
-                      <div className="donorDetails">
-                        <div className="donorName">
-                          <h2>Adam Smith</h2>
+                  {data && data.length !== 0
+                    ? data?.map((data) => (
+                        <div
+                          className="donorContainer"
+                          key={data?.data?.donor_id}
+                        >
+                          {/* donor 1 */}
+                          <div className="detailbox">
+                            <div className="donorDetails">
+                              <div className="donorName">
+                                <h2>{data?.data?.name}</h2>
+                              </div>
+                              <div className="donorAddress">
+                                <h4>Blood Group - {data?.data?.blood_group}</h4>
+                                <h4>
+                                  {data?.data?.count} donations made till now
+                                </h4>
+                              </div>
+                            </div>
+                            <div className="donorDistance">
+                              <LocationOnIcon />
+                              <p>{data?.data?.distance} Kms away</p>
+                            </div>
+                          </div>
+                          {/* donor 2 */}
+                          {/* <div className="detailbox">
+                        <div className="donorDetails">
+                          <div className="donorName">
+                            <h2>Adam Smith</h2>
+                          </div>
+                          <div className="donorAddress">
+                            <h4>45/10</h4>
+                          </div>
                         </div>
-                        <div className="donorAddress">
-                          <h4>45/10</h4>
+                        <div className="donorDistance">
+                          <LocationOnIcon />
+                          <p>1.5km</p>
                         </div>
-                      </div>
-                      <div className="donorDistance">
-                        <LocationOnIcon />
-                        <p>1.5km</p>
-                      </div>
-                    </div>
-                    {/* donor 2 */}
-                    <div className="detailbox">
-                      <div className="donorDetails">
-                        <div className="donorName">
-                          <h2>Adam Smith</h2>
+                      </div> */}
                         </div>
-                        <div className="donorAddress">
-                          <h4>45/10</h4>
+                      ))
+                    : dummyNearbyDonor?.map((dummyNearbyDonor) => (
+                        <div
+                          className="donorContainer"
+                          key={dummyNearbyDonor?.donor_id}
+                        >
+                          {/* donor 1 */}
+                          <div className="detailbox">
+                            <div className="donorDetails">
+                              <div className="donorName">
+                                <h2>{dummyNearbyDonor?.name}</h2>
+                              </div>
+                              <div className="donorAddress">
+                                <h4>
+                                  Blood Group - {dummyNearbyDonor.blood_group}
+                                </h4>
+                                <h4>
+                                  {dummyNearbyDonor.count} donations made till
+                                  now
+                                </h4>
+                              </div>
+                            </div>
+                            <div className="donorDistance">
+                              <LocationOnIcon />
+                              <p>{dummyNearbyDonor?.distance} Kms away</p>
+                            </div>
+                          </div>
+                          {/* donor 2 */}
+                          {/* <div className="detailbox">
+                        <div className="donorDetails">
+                          <div className="donorName">
+                            <h2>Adam Smith</h2>
+                          </div>
+                          <div className="donorAddress">
+                            <h4>45/10</h4>
+                          </div>
                         </div>
-                      </div>
-                      <div className="donorDistance">
-                        <LocationOnIcon />
-                        <p>1.5km</p>
-                      </div>
-                    </div>
-                  </div>
+                        <div className="donorDistance">
+                          <LocationOnIcon />
+                          <p>1.5km</p>
+                        </div>
+                      </div> */}
+                        </div>
+                      ))}
                 </TabPanel>
-                <TabPanel value="2">Item Two</TabPanel>
-                <TabPanel value="2">Item Two</TabPanel>
+                <TabPanel value="2">No nearby Blood Banks found</TabPanel>
               </TabContext>
             </Box>
           </div>

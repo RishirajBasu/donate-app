@@ -1,6 +1,7 @@
 import React from "react";
 import Header from "./UI/Header";
 import Sidebar from "./UI/Sidebar";
+import "./Rewards.css";
 const Rewards = () => {
   const sidebarProp = {
     home: false,
@@ -19,10 +20,10 @@ const Rewards = () => {
   };
   return (
     <div>
-      <div className="sidebar">
+      <div className="sidebarReward">
         <Sidebar {...sidebarProp} />
       </div>
-      <div className="header">
+      <div className="headerReward">
         <Header />
       </div>
     </div>
