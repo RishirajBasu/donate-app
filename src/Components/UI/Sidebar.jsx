@@ -10,7 +10,14 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import WorkspacePremiumIcon from "@mui/icons-material/WorkspacePremium";
 
-const Sidebar = ({ home, historyDonor, rewards, donor, active }) => {
+const Sidebar = ({
+  home,
+  historyDonor,
+  historyReciever,
+  rewards,
+  donor,
+  active,
+}) => {
   const navigate = useNavigate();
   const access = localStorage.getItem("access");
   const refresh = localStorage.getItem("refresh");
@@ -50,71 +57,71 @@ const Sidebar = ({ home, historyDonor, rewards, donor, active }) => {
           <h1>Donate</h1>
           <button className="beDonor">Be a Donor!</button>
         </div>
-        <ul className="list">
-          {home ? (
-            <button
-              className="listItem"
-              onClick={() => {
-                navigate("/");
-              }}
-              style={{
-                padding: active.padding,
-                border: active.border,
-                textAlign: active.textAlign,
-                color: active.color,
-                borderRadius: active.borderRadius,
-                backgroundColor: active.backgroundColor,
-                cursor: active.cursor,
-              }}
-            >
-              <HomeIcon className="icon" />
-              Home
-            </button>
-          ) : (
-            <button
-              className="listItem"
-              onClick={() => {
-                navigate("/");
-              }}
-            >
-              <HomeIcon className="icon" />
-              Home
-            </button>
-          )}
+        {donor ? (
+          <ul className="list">
+            {home ? (
+              <button
+                className="listItem"
+                onClick={() => {
+                  navigate("/");
+                }}
+                style={{
+                  padding: active.padding,
+                  border: active.border,
+                  textAlign: active.textAlign,
+                  color: active.color,
+                  borderRadius: active.borderRadius,
+                  backgroundColor: active.backgroundColor,
+                  cursor: active.cursor,
+                }}
+              >
+                <HomeIcon className="icon" />
+                Home
+              </button>
+            ) : (
+              <button
+                className="listItem"
+                onClick={() => {
+                  navigate("/");
+                }}
+              >
+                <HomeIcon className="icon" />
+                Home
+              </button>
+            )}
 
-          {historyDonor ? (
-            <button
-              className="listItem"
-              onClick={() => {
-                navigate("/historyDonor");
-              }}
-              style={{
-                padding: active.padding,
-                border: active.border,
-                textAlign: active.textAlign,
-                color: active.color,
-                borderRadius: active.borderRadius,
-                backgroundColor: active.backgroundColor,
-                cursor: active.cursor,
-              }}
-            >
-              <HistoryIcon className="icon" />
-              History
-            </button>
-          ) : (
-            <button
-              className="listItem"
-              onClick={() => {
-                navigate("/historyDonor");
-              }}
-            >
-              <HistoryIcon className="icon" />
-              History
-            </button>
-          )}
+            {historyDonor ? (
+              <button
+                className="listItem"
+                onClick={() => {
+                  navigate("/historyDonor");
+                }}
+                style={{
+                  padding: active.padding,
+                  border: active.border,
+                  textAlign: active.textAlign,
+                  color: active.color,
+                  borderRadius: active.borderRadius,
+                  backgroundColor: active.backgroundColor,
+                  cursor: active.cursor,
+                }}
+              >
+                <HistoryIcon className="icon" />
+                History
+              </button>
+            ) : (
+              <button
+                className="listItem"
+                onClick={() => {
+                  navigate("/historyDonor");
+                }}
+              >
+                <HistoryIcon className="icon" />
+                History
+              </button>
+            )}
 
-          {donor &&
-            (rewards ? (
+            {rewards ? (
               <button
                 className="listItem"
                 onClick={() => {
@@ -143,13 +150,82 @@ const Sidebar = ({ home, historyDonor, rewards, donor, active }) => {
                 <WorkspacePremiumIcon className="icon" />
                 Rewards
               </button>
-            ))}
+            )}
 
-          <button className="signout" onClick={signOut}>
-            <ExitToAppIcon className="icon signoutIcon" />
-            Sign out
-          </button>
-        </ul>
+            <button className="signout" onClick={signOut}>
+              <ExitToAppIcon className="icon signoutIcon" />
+              Sign out
+            </button>
+          </ul>
+        ) : (
+          <ul className="list">
+            {home ? (
+              <button
+                className="listItem"
+                onClick={() => {
+                  navigate("/");
+                }}
+                style={{
+                  padding: active.padding,
+                  border: active.border,
+                  textAlign: active.textAlign,
+                  color: active.color,
+                  borderRadius: active.borderRadius,
+                  backgroundColor: active.backgroundColor,
+                  cursor: active.cursor,
+                }}
+              >
+                <HomeIcon className="icon" />
+                Home
+              </button>
+            ) : (
+              <button
+                className="listItem"
+                onClick={() => {
+                  navigate("/");
+                }}
+              >
+                <HomeIcon className="icon" />
+                Home
+              </button>
+            )}
+
+            {historyReciever ? (
+              <button
+                className="listItem"
+                onClick={() => {
+                  navigate("/historyReciever");
+                }}
+                style={{
+                  padding: active.padding,
+                  border: active.border,
+                  textAlign: active.textAlign,
+                  color: active.color,
+                  borderRadius: active.borderRadius,
+                  backgroundColor: active.backgroundColor,
+                  cursor: active.cursor,
+                }}
+              >
+                <HistoryIcon className="icon" />
+                History
+              </button>
+            ) : (
+              <button
+                className="listItem"
+                onClick={() => {
+                  navigate("/historyReciever");
+                }}
+              >
+                <HistoryIcon className="icon" />
+                History
+              </button>
+            )}
+            <button className="signout" onClick={signOut}>
+              <ExitToAppIcon className="icon signoutIcon" />
+              Sign out
+            </button>
+          </ul>
+        )}
       </div>
     </div>
   );

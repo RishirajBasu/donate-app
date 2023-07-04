@@ -6,6 +6,7 @@ import Otp from "./Components/auth/Otp";
 import Error from "./Components/errorpages/Error";
 import Home from "./Components/Home";
 import HistoryDonor from "./Components/HistoryDonor";
+import HistoryReciever from "./Components/HistoryReciever";
 import Rewards from "./Components/Rewards";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
@@ -25,6 +26,7 @@ function App() {
             <Route path="/error" element={<Error />} />
             <Route path="/" element={<Home />} />
             <Route path="/historyDonor" element={<HistoryDonor />} />
+            <Route path="/historyReciever" element={<HistoryReciever />} />
             <Route path="/rewards" element={<Rewards />} />
           </Routes>
         </BrowserRouter>

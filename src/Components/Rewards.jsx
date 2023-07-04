@@ -4,8 +4,9 @@ import Sidebar from "./UI/Sidebar";
 const Rewards = () => {
   const sidebarProp = {
     home: false,
-    history: false,
+    historyDonor: false,
     rewards: true,
+    donor: true,
     active: {
       padding: "20px",
       border: "none",
@@ -19,7 +20,7 @@ const Rewards = () => {
   return (
     <div>
       <div className="sidebar">
-        <Sidebar />
+        <Sidebar {...sidebarProp} />
       </div>
       <div className="header">
         <Header />

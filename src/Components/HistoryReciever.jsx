@@ -1,7 +1,7 @@
 import React from "react";
 import Sidebar from "./UI/Sidebar";
 import Header from "./UI/Header";
-import "./HistoryDonor.css";
+import "./HistoryReciever.css";
 import { styled } from "@mui/material/styles";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -11,12 +11,12 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 
-const HistoryDonor = () => {
+const HistoryReciever = () => {
   const sidebarProp = {
     home: false,
-    historyDonor: true,
+    historyReciever: true,
     rewards: false,
-    donor: true,
+    donor: false,
     active: {
       padding: "20px",
       border: "none",
@@ -184,4 +184,4 @@ const HistoryDonor = () => {
   );
 };
 
-export default HistoryDonor;
+export default HistoryReciever;

@@ -25,7 +25,7 @@ const Home = () => {
   const user_id = localStorage.getItem("user_id");
   const sidebarProp = {
     home: true,
-    history: false,
+    historyReciever: false,
     rewards: false,
     donor: false,
     active: {
