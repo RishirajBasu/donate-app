@@ -156,7 +156,9 @@ const Home = () => {
                       </div>
                     ))
                   ) : (
-                    <p>No data</p>
+                    <p>
+                      Sorry! No nearby donors found. Please try again later!
+                    </p>
                   )}
                 </TabPanel>
                 <TabPanel value="2">No nearby Blood Banks found</TabPanel>

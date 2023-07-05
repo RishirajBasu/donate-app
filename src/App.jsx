@@ -25,8 +25,8 @@ function App() {
             <Route path="/otp" element={<Otp />} />
             <Route path="/error" element={<Error />} />
             <Route path="/" element={<Home />} />
-            <Route path="/historyDonor" element={<HistoryDonor />} />
-            <Route path="/historyReciever" element={<HistoryReciever />} />
+            <Route path="/history-donor" element={<HistoryDonor />} />
+            <Route path="/history-reciever" element={<HistoryReciever />} />
             <Route path="/rewards" element={<Rewards />} />
           </Routes>
         </BrowserRouter>
