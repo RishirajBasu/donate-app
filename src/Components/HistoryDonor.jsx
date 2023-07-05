@@ -10,8 +10,12 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import axios from "axios";
+import { useState } from "react";
+import { useEffect } from "react";
 
 const HistoryDonor = () => {
+  const [data, setData] = useState([]);
   const sidebarProp = {
     home: false,
     historyDonor: true,
@@ -84,8 +88,32 @@ const HistoryDonor = () => {
       dateofRequest: "15/08/23",
     },
   ];
-  // reciever window
-
+  // donor window
+  const fetchDonorHistory = async (user_id) => {
+    try {
+      let { data } = await axios.post(
+        "http://127.0.0.1:8000/donation/donor-history/",
+        {
+          donor_id: user_id,
+        },
+        {
+          headers: { "Content-Type": "application/json" },
+        }
+      );
+      setData(data);
+      console.log("Data", data);
+    } catch (error) {
+      if (error.response.status === 400) {
+        toast.error(error.response.data.message);
+      } else {
+        toast.error("Something went wrong!");
+      }
+    }
+  };
+  useEffect(() => {
+    const user_id = localStorage.getItem("user_id");
+    fetchDonorHistory(user_id);
+  }, []);
   return (
     <div className="historyContainer">
       <div className="historyLeft">
@@ -154,9 +182,30 @@ const HistoryDonor = () => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {rows?.map((row) => (
+                {data && data.length !== 0 ? (
+                  data.map((data) => (
+                    <TableRow
+                      key={data.name}
+                      sx={{
+                        "&:last-child td, &:last-child th": {
+                          border: 0,
+                        },
+                      }}
+                      className="coloredBg"
+                    >
+                      <TableCell component="th" scope="row">
+                        {data.name}
+                      </TableCell>
+                      <TableCell align="left">{data.bloodGroup}</TableCell>
+                      <TableCell align="left">{data.status}</TableCell>
+                      <TableCell align="left">{data.units}</TableCell>
+                      <TableCell align="left">{data.paymentStatus}</TableCell>
+                      <TableCell align="left">{data.dateofDonation}</TableCell>
+                      <TableCell align="left">{data.dateofRequest}</TableCell>
+                    </TableRow>
+                  ))
+                ) : (
                   <TableRow
-                    key={row.name}
                     sx={{
                       "&:last-child td, &:last-child th": {
                         border: 0,
@@ -164,17 +213,16 @@ const HistoryDonor = () => {
                     }}
                     className="coloredBg"
                   >
-                    <TableCell component="th" scope="row">
-                      {row.name}
+                    <TableCell
+                      component="th"
+                      scope="row"
+                      sx={{ fontWeight: 700 }}
+                      align="right"
+                    >
+                      No history found at the moment!
                     </TableCell>
-                    <TableCell align="left">{row.bloodGroup}</TableCell>
-                    <TableCell align="left">{row.status}</TableCell>
-                    <TableCell align="left">{row.units}</TableCell>
-                    <TableCell align="left">{row.paymentStatus}</TableCell>
-                    <TableCell align="left">{row.dateofDonation}</TableCell>
-                    <TableCell align="left">{row.dateofRequest}</TableCell>
                   </TableRow>
-                ))}
+                )}
               </TableBody>
             </Table>
           </TableContainer>
