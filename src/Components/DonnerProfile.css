@@ -1,0 +1,96 @@
+.historyRight {
+  display: flex;
+  flex-direction: column;
+  margin-left: 285px;
+}
+
+.historyTable {
+  margin: 40px;
+  padding: 10px;
+  border: none;
+  overflow: scroll;
+}
+
+.historyTable::-webkit-scrollbar {
+  display: none;
+}
+
+.historyTable h4 {
+
+  margin: 35px 0px 15px 0px;
+}
+
+.requestName {
+  display: flex;
+  flex-direction: column;
+  margin-left: 32px;
+}
+
+.requestName h4 {
+  margin-left: 32px;
+}
+
+.coloredBg:nth-child(even) {
+  background-color: #ffdcdccb;
+}
+
+.accept-button {
+  background-color: green;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.accept-button:hover {
+  background-color: darkgreen;
+}
+
+.nameBox {
+  margin: 3px;
+  padding: 11px;
+  border: none;
+  margin-right: 85px;
+}
+
+/* SideBox.css */
+.side-box {
+  background-color: rgb(255, 60, 0);
+  color: white;
+  padding: 20px;
+  text-align: center;
+  width: 25%;
+  border-radius: 20px;
+  border: none;
+}
+
+.level-text {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.level-details {
+  font-size: 30px;
+  color: goldenrod;
+}
+
+.progress-bar {
+  background-color: rgb(251, 251, 251);
+  height: 20px;
+  margin-top: 20px;
+  position: relative;
+}
+
+.progress-bar-fill {
+  background-color: rgb(241, 253, 0);
+  height: 100%;
+  width: 50%;
+  /* Adjust the width based on the progress */
+}
+
+.donorProfileInfo {
+  display: flex;
+}
