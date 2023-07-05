@@ -96,7 +96,7 @@ const HistoryReciever = () => {
           <Header />
         </div>
         <div className="historyTable">
-          <TableContainer component={Paper}>
+          <TableContainer component={Paper} sx={{ borderRadius: "20px" }}>
             <Table
               sx={{ minWidth: 650 }}
               size="Large"
