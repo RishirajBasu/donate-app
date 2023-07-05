@@ -12,11 +12,17 @@
  .historyTable::-webkit-scrollbar{
   display: none;
  }
+    .historyTable h4 {
+
+      margin: 35px 0px 15px 0px ;
+    }
  .requestName{
    display: flex;
    flex-direction: column;
    margin-left: 32px ;
-   
+ }
+ .requestName h4{
+  margin-left: 32px;
  }
  .coloredBg:nth-child(even){
     background-color: #ffdcdccb;

@@ -80,7 +80,7 @@ const DonnerProfile = () => {
         </div>
         <div className="donorProfileInfo">
           <div className="requestName">
-            Donner Requests
+            <h4>Donner Requests</h4>
             <div className="nameBox">
               <TableContainer
                 component={Paper}
