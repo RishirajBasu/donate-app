@@ -4,10 +4,13 @@
     margin-left: 285px ;
  }
  .historyTable{
-    margin: 20px;
+    margin: 40px;
     padding: 10px;
     border: none;
-  
+    overflow: scroll;
+ }
+ .historyTable::-webkit-scrollbar{
+  display: none;
  }
  .requestName{
    display: flex;

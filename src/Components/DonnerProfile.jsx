@@ -82,7 +82,10 @@ const DonnerProfile = () => {
           <div className="requestName">
             Donner Requests
             <div className="nameBox">
-              <TableContainer component={Paper}>
+              <TableContainer
+                component={Paper}
+                sx={{ borderRadius: "20px", margin: "5px" }}
+              >
                 <Table
                   sx={{ minWidth: 650 }}
                   size="Large"
@@ -121,7 +124,10 @@ const DonnerProfile = () => {
                   </TableHead>
                 </Table>
               </TableContainer>
-              <TableContainer component={Paper}>
+              <TableContainer
+                component={Paper}
+                sx={{ borderRadius: "20px", margin: "5px" }}
+              >
                 <Table
                   sx={{ minWidth: 650 }}
                   size="Large"
