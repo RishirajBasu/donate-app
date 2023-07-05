@@ -19,7 +19,7 @@ function App() {
             <Route path="/signup" element={<Signin />} />
             <Route path="/login" element={<Login />} />
             <Route path="/otp" element={<Otp />} />
-            <Route path="/DonnerProfile" element={<DonnerProfile />} />
+            <Route path="/donnerProfile" element={<DonnerProfile />} />
           </Routes>
         </BrowserRouter>
       </div>

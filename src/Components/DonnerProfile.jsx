@@ -10,12 +10,12 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import Button from '@mui/material/Button';  
+import Button from "@mui/material/Button";
 
 const DonnerProfile = () => {
   const sidebarProp = {
     home: false,
-    historyDonor: true,
+    historyDonor: false,
     rewards: false,
     donor: true,
     active: {
@@ -28,26 +28,8 @@ const DonnerProfile = () => {
       cursor: "pointer",
     },
   };
- 
+
   const rows = [
-    {
-      name: "Rishiraj Basu",
-      bloodGroup: "B+",
-      status: "active",
-      units: 2,
-      paymentStatus: "Pending",
-      dateofDonation: "12/08/23",
-      dateofRequest: "15/08/23",
-    },
-    {
-      name: "Rishiraj Basu",
-      bloodGroup: "B+",
-      status: "active",
-      units: 2,
-      paymentStatus: "Pending",
-      dateofDonation: "12/08/23",
-      dateofRequest: "15/08/23",
-    },
     {
       name: "Rishiraj Basu",
       bloodGroup: "B+",
@@ -88,9 +70,7 @@ const DonnerProfile = () => {
   // reciever window
 
   return (
-    
     <div className="historyContainer">
-      
       <div className="historyLeft">
         <Sidebar {...sidebarProp} />
       </div>
@@ -98,103 +78,102 @@ const DonnerProfile = () => {
         <div className="headerBox">
           <Header />
         </div>
-        <div className="requestName">
-        Donner Requests
-        <div className="nameBox">
-        <TableContainer component={Paper}>
-            <Table
-              sx={{ minWidth: 650 }}
-              size="Large"
-              aria-label="a dense table"
-            >
-              <TableHead>
-                <TableRow>
-                  <TableCell
-                    align="left"
-                    sx={{ fontSize: 16, fontWeight: 700 }}
-                  >
-                    Sayak Ghosh
-                  </TableCell>
-                  <TableCell
-                    align="left"
-                    sx={{ fontSize: 16, fontWeight: 700 }}
-                  >
-                    88888-999999
-                  </TableCell>
-                  <TableCell
-                    align="left"
-                    className="tableHead"
-                    sx={{ fontSize: 16, fontWeight: 700 }}
-                  >
-                    2 Units
-                  </TableCell>
-                  <TableCell
-                    align="left"
-                    className="tableHead"
-                    sx={{ fontSize: 16, fontWeight: 700 }}
-                  >
-                    1.3km Away
-                  </TableCell>                 
-                  <button className="accept-button">
-                        Accept
-                  </button>
-                  
-                  </TableRow>
-              </TableHead>
-              </Table>
-            </TableContainer>
-            <TableContainer component={Paper}>
-            <Table
-              sx={{ minWidth: 650 }}
-              size="Large"
-              aria-label="a dense table"
-            >
-              <TableHead>
-                <TableRow>
-                  <TableCell
-                    align="left"
-                    sx={{ fontSize: 16, fontWeight: 700 }}
-                  >
-                    Deep Ghosh
-                  </TableCell>
-                  <TableCell
-                    align="left"
-                    sx={{ fontSize: 16, fontWeight: 700 }}
-                  >
-                    88888-999999
-                  </TableCell>
-                  <TableCell
-                    align="left"
-                    className="tableHead"
-                    sx={{ fontSize: 16, fontWeight: 700 }}
-                  >
-                    3 Units
-                  </TableCell>
-                  <TableCell
-                    align="left"
-                    className="tableHead"
-                    sx={{ fontSize: 16, fontWeight: 700 }}
-                  >
-                    4km Away
-                  </TableCell>
-                  <button className="accept-button">
-                        Accept
-                  </button>
-                  </TableRow>
-              </TableHead>
-              </Table>             
-           </TableContainer>
+        <div className="donorProfileInfo">
+          <div className="requestName">
+            Donner Requests
+            <div className="nameBox">
+              <TableContainer component={Paper}>
+                <Table
+                  sx={{ minWidth: 650 }}
+                  size="Large"
+                  aria-label="a dense table"
+                >
+                  <TableHead>
+                    <TableRow>
+                      <TableCell
+                        align="left"
+                        sx={{ fontSize: 16, fontWeight: 700 }}
+                      >
+                        Sayak Ghosh
+                      </TableCell>
+                      <TableCell
+                        align="left"
+                        sx={{ fontSize: 16, fontWeight: 700 }}
+                      >
+                        88888-999999
+                      </TableCell>
+                      <TableCell
+                        align="left"
+                        className="tableHead"
+                        sx={{ fontSize: 16, fontWeight: 700 }}
+                      >
+                        2 Units
+                      </TableCell>
+                      <TableCell
+                        align="left"
+                        className="tableHead"
+                        sx={{ fontSize: 16, fontWeight: 700 }}
+                      >
+                        1.3km Away
+                      </TableCell>
+                      <button className="accept-button">Accept</button>
+                    </TableRow>
+                  </TableHead>
+                </Table>
+              </TableContainer>
+              <TableContainer component={Paper}>
+                <Table
+                  sx={{ minWidth: 650 }}
+                  size="Large"
+                  aria-label="a dense table"
+                >
+                  <TableHead>
+                    <TableRow>
+                      <TableCell
+                        align="left"
+                        sx={{ fontSize: 16, fontWeight: 700 }}
+                      >
+                        Deep Ghosh
+                      </TableCell>
+                      <TableCell
+                        align="left"
+                        sx={{ fontSize: 16, fontWeight: 700 }}
+                      >
+                        88888-999999
+                      </TableCell>
+                      <TableCell
+                        align="left"
+                        className="tableHead"
+                        sx={{ fontSize: 16, fontWeight: 700 }}
+                      >
+                        3 Units
+                      </TableCell>
+                      <TableCell
+                        align="left"
+                        className="tableHead"
+                        sx={{ fontSize: 16, fontWeight: 700 }}
+                      >
+                        4km Away
+                      </TableCell>
+                      <button className="accept-button">Accept</button>
+                    </TableRow>
+                  </TableHead>
+                </Table>
+              </TableContainer>
+            </div>
+          </div>
+          <div className="side-box">
+            <div className="level-text">LEVEL</div>
+            <div className="level-details">2</div>
+            <div className="progress-bar">
+              <div className="progress-bar-fill"></div>
+            </div>
+          </div>
         </div>
-      </div>
-      <div className="side-box">
-      <div className="level-text">LEVEL</div>
-      <div className="level-details">2</div>
-      <div className="progress-bar">
-        <div className="progress-bar-fill"></div>
-      </div>
-    </div>
+
         <div className="historyTable">
-          <TableContainer component={Paper}>
+          <h4>See whom you have donated till now!</h4>
+          <TableContainer component={Paper} sx={{ borderRadius: "20px" }}>
             <Table
               sx={{ minWidth: 650 }}
               size="Large"
