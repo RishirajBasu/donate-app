@@ -99,7 +99,7 @@ const Home = () => {
       count: 0,
     },
     {
-      donor_id: 9,
+      donor_id: 1,
       name: "Greg Ipe",
       blood_group: "O+",
       distance: 4.44,
@@ -124,6 +124,7 @@ const Home = () => {
   useEffect(() => {
     fetchDonorData(user_id);
     access();
+    console.log("use");
     // fetchdata(user_id);
   }, []);
 
@@ -162,7 +163,7 @@ const Home = () => {
                     <Tab label="Blood-Banks" value="2" />
                     <button
                       className="refreshButton"
-                      onClick={fetchDonorData(user_id)}
+                      // onClick={fetchDonorData(user_id)}
                     >
                       <LoopIcon className="loop" fontSize="large" />
                     </button>
@@ -171,27 +172,27 @@ const Home = () => {
                 {/* the value 1 represents the tab in which the content is inserted which is tab 1 */}
                 <TabPanel value="1">
                   {data && data.length !== 0
-                    ? data?.map((data) => (
+                    ? data.map((data) => (
                         <div
                           className="donorContainer"
-                          key={data?.data?.donor_id}
+                          key={data.data.donor_id}
                         >
                           {/* donor 1 */}
                           <div className="detailbox">
                             <div className="donorDetails">
                               <div className="donorName">
-                                <h2>{data?.data?.name}</h2>
+                                <h2>{data.data.name}</h2>
                               </div>
                               <div className="donorAddress">
-                                <h4>Blood Group - {data?.data?.blood_group}</h4>
+                                <h4>Blood Group - {data.data.blood_group}</h4>
                                 <h4>
-                                  {data?.data?.count} donations made till now
+                                  {data.data.count} donations made till now
                                 </h4>
                               </div>
                             </div>
                             <div className="donorDistance">
                               <LocationOnIcon />
-                              <p>{data?.data?.distance} Kms away</p>
+                              <p>{data.data.distance} Kms away</p>
                             </div>
                           </div>
                           {/* donor 2 */}
@@ -211,16 +212,16 @@ const Home = () => {
                       </div> */}
                         </div>
                       ))
-                    : dummyNearbyDonor?.map((dummyNearbyDonor) => (
+                    : dummyNearbyDonor.map((dummyNearbyDonor) => (
                         <div
                           className="donorContainer"
-                          key={dummyNearbyDonor?.donor_id}
+                          key={dummyNearbyDonor.donor_id}
                         >
                           {/* donor 1 */}
                           <div className="detailbox">
                             <div className="donorDetails">
                               <div className="donorName">
-                                <h2>{dummyNearbyDonor?.name}</h2>
+                                <h2>{dummyNearbyDonor.name}</h2>
                               </div>
                               <div className="donorAddress">
                                 <h4>
@@ -234,7 +235,7 @@ const Home = () => {
                             </div>
                             <div className="donorDistance">
                               <LocationOnIcon />
-                              <p>{dummyNearbyDonor?.distance} Kms away</p>
+                              <p>{dummyNearbyDonor.distance} Kms away</p>
                             </div>
                           </div>
                           {/* donor 2 */}
