@@ -8,6 +8,7 @@ import Home from "./Components/Home";
 import HistoryDonor from "./Components/HistoryDonor";
 import HistoryReciever from "./Components/HistoryReciever";
 import Rewards from "./Components/Rewards";
+import DonorDashboard from "./Components/DonorDashboard";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -28,6 +29,7 @@ function App() {
             <Route path="/history-donor" element={<HistoryDonor />} />
             <Route path="/history-reciever" element={<HistoryReciever />} />
             <Route path="/rewards" element={<Rewards />} />
+            <Route path="/donor-dashboard" element={<DonorDashboard />} />
           </Routes>
         </BrowserRouter>
       </div>
