@@ -163,29 +163,6 @@ const EditProfile = () => {
                 ) : null}
               </div>
             </div>
-
-            {/* Email */}
-            <div className="form-group">
-              <label htmlFor="email" className="input-label">
-                Email{" "}
-              </label>
-              <input
-                type="email"
-                name="email"
-                id="email"
-                autoComplete="off"
-                placeholder="Enter your Email ID"
-                value={values.email}
-                onChange={handleChange}
-                onBlur={handleBlur}
-              />
-              {errors.email && touched.email ? (
-                <div className="errors">
-                  <p>{errors.email}</p>
-                </div>
-              ) : null}
-            </div>
-
             <div className="form-group">
               <label htmlFor="address" className="input-label">
                 Address{" "}
@@ -252,72 +229,7 @@ const EditProfile = () => {
               ) : null}
             </div>
 
-            {/* Adhaar card number */}
-            <div className="form-group">
-              <label htmlFor="adhaar_number" className="input-label">
-                Adhaar Card Number{" "}
-              </label>
-              <input
-                type="number"
-                name="adhaar_number"
-                id="adhaar_number"
-                autoComplete="off"
-                placeholder="Enter your Adhaar Card Number"
-                value={values.adhaar_number}
-                onChange={handleChange}
-                onBlur={handleBlur}
-              />
-              {errors.adhaar_number && touched.adhaar_number ? (
-                <div className="errors">
-                  <p>{errors.adhaar_number}</p>
-                </div>
-              ) : null}
-            </div>
-
-            {/* Password */}
-            <div className="form-group">
-              <label htmlFor="password" className="input-label">
-                New Password{" "}
-              </label>
-              <input
-                type="password"
-                name="password"
-                id="password"
-                autoComplete="off"
-                placeholder="Enter your Password"
-                value={values.password}
-                onChange={handleChange}
-                onBlur={handleBlur}
-              />
-              {errors.password && touched.password ? (
-                <div className="errors">
-                  <p>{errors.password}</p>
-                </div>
-              ) : null}
-            </div>
-
-            {/* Confirm Password */}
-            <div className="form-group">
-              <label htmlFor="confirm_password" className="input-label">
-                New Confirm Password{" "}
-              </label>
-              <input
-                type="password"
-                name="confirm_password"
-                id="confirm_password"
-                autoComplete="off"
-                placeholder="Confirm your Password"
-                value={values.confirm_password}
-                onChange={handleChange}
-                onBlur={handleBlur}
-              />
-              {errors.confirm_password && touched.confirm_password ? (
-                <div className="errors">
-                  <p>{errors.confirm_password}</p>
-                </div>
-              ) : null}
-            </div>
-
+            {/* Submit button  */}
             <div className="buttons">
               <LoadingButton
                 text={"Edit Profile"}
