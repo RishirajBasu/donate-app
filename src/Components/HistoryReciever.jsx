@@ -33,56 +33,54 @@ const HistoryReciever = () => {
       cursor: "pointer",
     },
   };
-  const example = [
-    {
-      request_id: "ede6ec69-e627-4af9-a867-cff3195f76a3",
-      donor_id: {
-        id: 6,
-        user: {
-          id: 7,
-          coordinates: {
-            latitude: "22.4473",
-            longitude: "88.3920",
-            last_updated: "2023-07-02T11:41:27.899638Z",
-          },
-          email: "sayaksaha.107@gmail.com",
-          first_name: "Sayak",
-          last_name: "Saha",
-          phone: "1234567875",
-          address: "abc",
-          date_of_birth: "2020-01-01",
-          is_verified: true,
-          is_donar: false,
-          adhaar_number: "123456789020",
-          created_at: "2023-06-22T15:46:08.390060Z",
-          updated_at: "2023-07-02T07:57:24.750804Z",
-          donor_application_status: "VR",
+  const example = {
+    request_id: "ede6ec69-e627-4af9-a867-cff3195f76a3",
+    donor_id: {
+      id: 6,
+      user: {
+        id: 7,
+        coordinates: {
+          latitude: "22.4473",
+          longitude: "88.3920",
+          last_updated: "2023-07-02T11:41:27.899638Z",
         },
-        donor_since: "2023-06-27",
-        blood_group: "A+",
-        last_donated_on: null,
-        is_available: true,
+        email: "sayaksaha.107@gmail.com",
+        first_name: "Sayak",
+        last_name: "Saha",
+        phone: "1234567875",
+        address: "abc",
+        date_of_birth: "2020-01-01",
         is_verified: true,
-        updated_at: "2023-07-02T13:40:58.258074Z",
-        level: 1,
-        donation_count: 0,
-        donation_required_to_reach_next_level: 0,
-        active_donation_request: null,
+        is_donar: false,
+        adhaar_number: "123456789020",
+        created_at: "2023-06-22T15:46:08.390060Z",
+        updated_at: "2023-07-02T07:57:24.750804Z",
+        donor_application_status: "VR",
       },
-      phone_number: "9477035368",
-      blood_group: "O-",
-      required_on: "2023-07-01T11:11:00Z",
-      place_of_donation: "Jadavpur",
-      units_required: 5,
-      reason: null,
-      type_of_donation: "blood",
-      is_urgent: true,
-      is_fullfiled: true,
-      current_status: "fullfilled",
-      requested_by: 14,
-      coordinates: 5,
+      donor_since: "2023-06-27",
+      blood_group: "A+",
+      last_donated_on: null,
+      is_available: true,
+      is_verified: true,
+      updated_at: "2023-07-02T13:40:58.258074Z",
+      level: 1,
+      donation_count: 0,
+      donation_required_to_reach_next_level: 0,
+      active_donation_request: null,
     },
-  ];
+    phone_number: "9477035368",
+    blood_group: "O-",
+    required_on: "2023-07-01T11:11:00Z",
+    place_of_donation: "Jadavpur",
+    units_required: 5,
+    reason: null,
+    type_of_donation: "blood",
+    is_urgent: true,
+    is_fullfiled: true,
+    current_status: "fullfilled",
+    requested_by: 14,
+    coordinates: 5,
+  };
   // reciever window
   const fetchRecieverHistory = async (user_id) => {
     try {
@@ -97,6 +95,9 @@ const HistoryReciever = () => {
       );
       setData(data);
       console.log("Data", data);
+      if (!data || data.length === 0) {
+        toast.warn("No history found at the moment!");
+      }
     } catch (error) {
       if (error.response.status === 400) {
         toast.error(error.response.data.message);
@@ -131,7 +132,7 @@ const HistoryReciever = () => {
                     align="left"
                     sx={{ fontSize: 16, fontWeight: 700 }}
                   >
-                    Name
+                    Donor
                   </TableCell>
                   <TableCell
                     align="left"
@@ -158,13 +159,6 @@ const HistoryReciever = () => {
                     className="tableHead"
                     sx={{ fontSize: 16, fontWeight: 700 }}
                   >
-                    Donor
-                  </TableCell>
-                  <TableCell
-                    align="left"
-                    className="tableHead"
-                    sx={{ fontSize: 16, fontWeight: 700 }}
-                  >
                     Date of Donation
                   </TableCell>
                   <TableCell
@@ -180,7 +174,7 @@ const HistoryReciever = () => {
                 {data && data.length !== 0 ? (
                   data.map((data) => (
                     <TableRow
-                      key={data.donor_id.user.id}
+                      key={data.request_id}
                       sx={{
                         "&:last-child td, &:last-child th": {
                           border: 0,
@@ -193,18 +187,16 @@ const HistoryReciever = () => {
                           " " +
                           data.donor_id.user.last_name}
                       </TableCell>
-                      <TableCell align="left">
-                        {data.donor_id.user.blood_group}
-                      </TableCell>
-                      <TableCell align="left">{data.status}</TableCell>
-                      <TableCell align="left">{data.units}</TableCell>
-                      <TableCell align="left">{data.paymentStatus}</TableCell>
+                      <TableCell align="left">{data.blood_group}</TableCell>
+                      <TableCell align="left">{data.current_status}</TableCell>
+                      <TableCell align="left">{data.units_required}</TableCell>
                       <TableCell align="left">{data.dateofDonation}</TableCell>
                       <TableCell align="left">{data.dateofRequest}</TableCell>
                     </TableRow>
                   ))
                 ) : (
                   <TableRow
+                    key={example.request_id}
                     sx={{
                       "&:last-child td, &:last-child th": {
                         border: 0,
@@ -212,14 +204,14 @@ const HistoryReciever = () => {
                     }}
                     className="coloredBg"
                   >
-                    <TableCell
-                      component="th"
-                      scope="row"
-                      sx={{ fontWeight: 700 }}
-                      align="right"
-                    >
-                      No history found at the moment!
+                    <TableCell component="th" scope="row">
+                      --
                     </TableCell>
+                    <TableCell align="left">--</TableCell>
+                    <TableCell align="left">--</TableCell>
+                    <TableCell align="left">--</TableCell>
+                    <TableCell align="left">--</TableCell>
+                    <TableCell align="left">--</TableCell>
                   </TableRow>
                 )}
               </TableBody>

@@ -14,3 +14,6 @@
 .coloredBg:nth-child(even) {
     background-color: #ffdcdccb;
 }
+.historyErrorMessage{
+    padding: 20px;
+}
