@@ -85,6 +85,11 @@ const EditProfile = () => {
           password: values.password,
           confirm_password: values.confirm_password,
           address: values.address,
+        },
+        {
+          headers: {
+            "Content-type": "application/json",
+          },
         }
       );
 
@@ -104,6 +109,7 @@ const EditProfile = () => {
   useEffect(() => {
     const user_id = localStorage.getItem("user_id");
     fetchProfileData(user_id);
+    console.log("hye");
   }, []);
   return (
     <div className="editContainer">
@@ -128,7 +134,7 @@ const EditProfile = () => {
                   name="fname"
                   id="fname"
                   autoComplete="off"
-                  placeholder="Enter your First Name"
+                  placeholder={prevData.first_name}
                   value={values.fname}
                   onChange={handleChange}
                   onBlur={handleBlur}
@@ -151,7 +157,7 @@ const EditProfile = () => {
                   name="lname"
                   id="lname"
                   autoComplete="off"
-                  placeholder="Enter your Last Name"
+                  placeholder={prevData.last_name}
                   value={values.lname}
                   onChange={handleChange}
                   onBlur={handleBlur}
@@ -172,7 +178,7 @@ const EditProfile = () => {
                 name="address"
                 id="address"
                 autoComplete="off"
-                placeholder="Enter your Address"
+                placeholder={prevData.address}
                 value={values.address}
                 onChange={handleChange}
                 onBlur={handleBlur}
@@ -194,7 +200,7 @@ const EditProfile = () => {
                 name="date"
                 id="date"
                 autoComplete="off"
-                placeholder="Enter your Date of Birth"
+                placeholder={prevData.date_of_birth}
                 style={{ color: "black" }}
                 value={values.date}
                 onChange={handleChange}
@@ -217,7 +223,7 @@ const EditProfile = () => {
                 name="number"
                 id="number"
                 autoComplete="off"
-                placeholder="Enter your Phone Number"
+                placeholder={prevData.phone}
                 value={values.number}
                 onChange={handleChange}
                 onBlur={handleBlur}
