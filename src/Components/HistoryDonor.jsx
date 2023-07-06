@@ -13,6 +13,8 @@ import Paper from "@mui/material/Paper";
 import axios from "axios";
 import { useState } from "react";
 import { useEffect } from "react";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const HistoryDonor = () => {
   const [data, setData] = useState([]);
@@ -32,62 +34,6 @@ const HistoryDonor = () => {
     },
   };
 
-  const rows = [
-    {
-      name: "Rishiraj Basu",
-      bloodGroup: "B+",
-      status: "active",
-      units: 2,
-      paymentStatus: "Pending",
-      dateofDonation: "12/08/23",
-      dateofRequest: "15/08/23",
-    },
-    {
-      name: "Rishiraj Basu",
-      bloodGroup: "B+",
-      status: "active",
-      units: 2,
-      paymentStatus: "Pending",
-      dateofDonation: "12/08/23",
-      dateofRequest: "15/08/23",
-    },
-    {
-      name: "Rishiraj Basu",
-      bloodGroup: "B+",
-      status: "active",
-      units: 2,
-      paymentStatus: "Pending",
-      dateofDonation: "12/08/23",
-      dateofRequest: "15/08/23",
-    },
-    {
-      name: "Rishiraj Basu",
-      bloodGroup: "B+",
-      status: "active",
-      units: 2,
-      paymentStatus: "Pending",
-      dateofDonation: "12/08/23",
-      dateofRequest: "15/08/23",
-    },
-    {
-      name: "Rishiraj Basu",
-      bloodGroup: "B+",
-      status: "active",
-      units: 2,
-      paymentStatus: "Pending",
-      dateofDonation: "12/08/23",
-      dateofRequest: "15/08/23",
-    },
-    {
-      name: "Rishiraj Basu",
-      bloodGroup: "B+",
-      status: "active",
-      units: 2,
-      paymentStatus: "Pending",
-      dateofDonation: "12/08/23",
-      dateofRequest: "15/08/23",
-    },
-  ];
   // donor window
   const fetchDonorHistory = async (user_id) => {
     try {
@@ -102,6 +48,9 @@ const HistoryDonor = () => {
       );
       setData(data);
       console.log("Data", data);
+      if (!data || data.length === 0) {
+        toast.warn("No history found at the moment!");
+      }
     } catch (error) {
       if (error.response.status === 400) {
         toast.error(error.response.data.message);
@@ -136,7 +85,7 @@ const HistoryDonor = () => {
                     align="left"
                     sx={{ fontSize: 16, fontWeight: 700 }}
                   >
-                    Name
+                    Reciever
                   </TableCell>
                   <TableCell
                     align="left"
@@ -163,13 +112,6 @@ const HistoryDonor = () => {
                     className="tableHead"
                     sx={{ fontSize: 16, fontWeight: 700 }}
                   >
-                    Payment Status
-                  </TableCell>
-                  <TableCell
-                    align="left"
-                    className="tableHead"
-                    sx={{ fontSize: 16, fontWeight: 700 }}
-                  >
                     Date of Donation
                   </TableCell>
                   <TableCell
@@ -185,7 +127,7 @@ const HistoryDonor = () => {
                 {data && data.length !== 0 ? (
                   data.map((data) => (
                     <TableRow
-                      key={data.name}
+                      key={data.request_id}
                       sx={{
                         "&:last-child td, &:last-child th": {
                           border: 0,
@@ -194,14 +136,20 @@ const HistoryDonor = () => {
                       className="coloredBg"
                     >
                       <TableCell component="th" scope="row">
-                        {data.name}
+                        {data.current_status === "fullfilled" ||
+                        data.current_status === "active"
+                          ? data.donor_id.user.first_name +
+                            " " +
+                            data.donor_id.user.last_name
+                          : "--"}
                       </TableCell>
-                      <TableCell align="left">{data.bloodGroup}</TableCell>
-                      <TableCell align="left">{data.status}</TableCell>
-                      <TableCell align="left">{data.units}</TableCell>
-                      <TableCell align="left">{data.paymentStatus}</TableCell>
-                      <TableCell align="left">{data.dateofDonation}</TableCell>
-                      <TableCell align="left">{data.dateofRequest}</TableCell>
+                      <TableCell align="left">{data.blood_group}</TableCell>
+                      <TableCell align="left">{data.current_status}</TableCell>
+                      <TableCell align="left">{data.units_required}</TableCell>
+                      <TableCell align="left">--</TableCell>
+                      <TableCell align="left">
+                        {data.required_on.slice(0, 16)}
+                      </TableCell>
                     </TableRow>
                   ))
                 ) : (
@@ -213,14 +161,14 @@ const HistoryDonor = () => {
                     }}
                     className="coloredBg"
                   >
-                    <TableCell
-                      component="th"
-                      scope="row"
-                      sx={{ fontWeight: 700 }}
-                      align="right"
-                    >
-                      No history found at the moment!
+                    <TableCell component="th" scope="row">
+                      --
                     </TableCell>
+                    <TableCell align="left">--</TableCell>
+                    <TableCell align="left">--</TableCell>
+                    <TableCell align="left">--</TableCell>
+                    <TableCell align="left">--</TableCell>
+                    <TableCell align="left">--</TableCell>
                   </TableRow>
                 )}
               </TableBody>

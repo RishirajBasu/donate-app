@@ -77,7 +77,7 @@ const HistoryReciever = () => {
     type_of_donation: "blood",
     is_urgent: true,
     is_fullfiled: true,
-    current_status: "fullfilled",
+    current_status: "pending",
     requested_by: 14,
     coordinates: 5,
   };
@@ -183,20 +183,24 @@ const HistoryReciever = () => {
                       className="coloredBg"
                     >
                       <TableCell component="th" scope="row">
-                        {data.donor_id.user.first_name +
-                          " " +
-                          data.donor_id.user.last_name}
+                        {data.current_status === "fullfilled" ||
+                        data.current_status === "active"
+                          ? data.donor_id.user.first_name +
+                            " " +
+                            data.donor_id.user.last_name
+                          : "--"}
                       </TableCell>
                       <TableCell align="left">{data.blood_group}</TableCell>
                       <TableCell align="left">{data.current_status}</TableCell>
                       <TableCell align="left">{data.units_required}</TableCell>
-                      <TableCell align="left">{data.dateofDonation}</TableCell>
-                      <TableCell align="left">{data.dateofRequest}</TableCell>
+                      <TableCell align="left">--</TableCell>
+                      <TableCell align="left">
+                        {data.required_on.slice(0, 16)}
+                      </TableCell>
                     </TableRow>
                   ))
                 ) : (
                   <TableRow
-                    key={example.request_id}
                     sx={{
                       "&:last-child td, &:last-child th": {
                         border: 0,
