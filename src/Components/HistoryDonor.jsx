@@ -185,7 +185,7 @@ const HistoryDonor = () => {
                 {data && data.length !== 0 ? (
                   data.map((data) => (
                     <TableRow
-                      key={data.name}
+                      key={data.request_id}
                       sx={{
                         "&:last-child td, &:last-child th": {
                           border: 0,
