@@ -7,35 +7,19 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import LoadingButton from "./UI/LoadingButton";
 import "./EditProfile.css";
-import { useFormik } from "formik";
-import { signinSchema } from "./auth/Schema";
+
 const EditProfile = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [prevData, setprevData] = useState({});
-  const initialvalues = {
+  const values = {
     fname: "",
     lname: "",
-    email: "",
     date: "",
     number: "",
     address: "",
-    adhaar_number: "",
-    password: "",
-    confirm_password: "",
   };
 
-  const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
-    useFormik({
-      initialValues: initialvalues,
-      validationSchema: signinSchema,
-      validateOnChange: signinSchema,
-      validateOnBlur: signinSchema,
-      onSubmit: (values, action) => {
-        console.log(values);
-        action.resetForm();
-      },
-    });
   const fetchProfileData = async (user_id) => {
     try {
       let { data } = await axios.get(
@@ -54,21 +38,12 @@ const EditProfile = () => {
       if (
         values.fname === "" ||
         values.lname === "" ||
-        values.email === "" ||
         values.date === "" ||
         values.number === "" ||
-        values.address === "" ||
-        values.adhaar_number === "" ||
-        values.password === "" ||
-        values.confirm_password === ""
+        values.address === ""
       ) {
         // alert("Kindly fill the Form properly");
         toast.warn("Kindly fill the form properly");
-        return;
-      }
-
-      if (values.password !== values.confirm_password) {
-        toast.error("Password and Confirm Password should be same");
         return;
       }
 
@@ -78,12 +53,8 @@ const EditProfile = () => {
         {
           first_name: values.fname,
           last_name: values.lname,
-          email: values.email,
           date_of_birth: values.date,
           phone: values.number,
-          adhaar_number: values.adhaar_number,
-          password: values.password,
-          confirm_password: values.confirm_password,
           address: values.address,
         },
         {
@@ -106,6 +77,14 @@ const EditProfile = () => {
     }
     setLoading(false);
   };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(values);
+  };
+  const handleBlur = (e) => {};
+  const handleChange = (e) => {
+    values[e.target.name] = e.target.value;
+  };
   useEffect(() => {
     const user_id = localStorage.getItem("user_id");
     fetchProfileData(user_id);
@@ -121,7 +100,12 @@ const EditProfile = () => {
           <div className="edit_text">
             <h1>Edit your profile: </h1>
           </div>
-          <form onSubmit={handleSubmit} autoComplete="off">
+          <form
+            onSubmit={(e) => {
+              handleSubmit(e);
+            }}
+            autoComplete="off"
+          >
             {/* name */}
             <div className="name_container">
               {/* FirstName */}
@@ -134,17 +118,15 @@ const EditProfile = () => {
                   name="fname"
                   id="fname"
                   autoComplete="off"
-                  placeholder={prevData.first_name}
-                  value={values.fname}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
+                  // value={prevData.first_name}
+                  onChange={(e) => {
+                    handleChange(e);
+                  }}
+                  onBlur={(e) => {
+                    handleBlur(e);
+                  }}
                   className="class_fname"
                 />
-                {errors.fname && touched.fname ? (
-                  <div className="errors">
-                    <p>{errors.fname}</p>
-                  </div>
-                ) : null}
               </div>
 
               {/* LastName */}
@@ -157,18 +139,38 @@ const EditProfile = () => {
                   name="lname"
                   id="lname"
                   autoComplete="off"
-                  placeholder={prevData.last_name}
-                  value={values.lname}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
+                  // value={prevData.last_name}
+                  onChange={(e) => {
+                    handleChange(e);
+                  }}
+                  onBlur={(e) => {
+                    handleBlur(e);
+                  }}
                 />
-                {errors.lname && touched.lname ? (
-                  <div className="errors">
-                    <p>{errors.lname}</p>
-                  </div>
-                ) : null}
               </div>
             </div>
+            {/* Email */}
+            <div className="form-group">
+              <label htmlFor="email" className="input-label">
+                Email{" "}
+              </label>
+              <input
+                type="email"
+                name="email"
+                id="email"
+                autoComplete="off"
+                // value={prevData.email}
+                onChange={(e) => {
+                  handleChange(e);
+                }}
+                onBlur={(e) => {
+                  handleBlur(e);
+                }}
+                readOnly
+              />
+            </div>
+
+            {/* address */}
             <div className="form-group">
               <label htmlFor="address" className="input-label">
                 Address{" "}
@@ -178,16 +180,14 @@ const EditProfile = () => {
                 name="address"
                 id="address"
                 autoComplete="off"
-                placeholder={prevData.address}
-                value={values.address}
-                onChange={handleChange}
-                onBlur={handleBlur}
+                // value={prevData.address}
+                onChange={(e) => {
+                  handleChange(e);
+                }}
+                onBlur={(e) => {
+                  handleBlur(e);
+                }}
               />
-              {errors.address && touched.address ? (
-                <div className="errors">
-                  <p>{errors.address}</p>
-                </div>
-              ) : null}
             </div>
 
             {/* Date of Birth */}
@@ -200,17 +200,15 @@ const EditProfile = () => {
                 name="date"
                 id="date"
                 autoComplete="off"
-                placeholder={prevData.date_of_birth}
                 style={{ color: "black" }}
-                value={values.date}
-                onChange={handleChange}
-                onBlur={handleBlur}
+                // value={prevData.date_of_birth}
+                onChange={(e) => {
+                  handleChange(e);
+                }}
+                onBlur={(e) => {
+                  handleBlur(e);
+                }}
               />
-              {errors.date && touched.date ? (
-                <div className="errors">
-                  <p>{errors.date}</p>
-                </div>
-              ) : null}
             </div>
 
             {/* Phone Number */}
@@ -223,16 +221,34 @@ const EditProfile = () => {
                 name="number"
                 id="number"
                 autoComplete="off"
-                placeholder={prevData.phone}
-                value={values.number}
-                onChange={handleChange}
-                onBlur={handleBlur}
+                // value={prevData.phone}
+                onChange={(e) => {
+                  handleChange(e);
+                }}
+                onBlur={(e) => {
+                  handleBlur(e);
+                }}
               />
-              {errors.number && touched.number ? (
-                <div className="errors">
-                  <p>{errors.number}</p>
-                </div>
-              ) : null}
+            </div>
+            {/* Adhaar card number */}
+            <div className="form-group">
+              <label htmlFor="adhaar_number" className="input-label">
+                Adhaar Card Number{" "}
+              </label>
+              <input
+                type="number"
+                name="adhaar_number"
+                id="adhaar_number"
+                autoComplete="off"
+                // value={prevData.adhaar_number}
+                onChange={(e) => {
+                  handleChange(e);
+                }}
+                onBlur={(e) => {
+                  handleBlur(e);
+                }}
+                readOnly
+              />
             </div>
 
             {/* Submit button  */}
