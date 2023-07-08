@@ -195,7 +195,7 @@ const HistoryReciever = () => {
                       <TableCell align="left">{data.units_required}</TableCell>
                       <TableCell align="left">--</TableCell>
                       <TableCell align="left">
-                        {data.required_on.slice(0, 16)}
+                        {data.required_on.slice(0, 10)}
                       </TableCell>
                     </TableRow>
                   ))
