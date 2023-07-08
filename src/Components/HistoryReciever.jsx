@@ -200,7 +200,25 @@ const HistoryReciever = () => {
                     </TableRow>
                   ))
                 ) : (
+                  // <TableRow
+                  //   sx={{
+                  //     "&:last-child td, &:last-child th": {
+                  //       border: 0,
+                  //     },
+                  //   }}
+                  //   className="coloredBg"
+                  // >
+                  //   <TableCell
+                  //     component="th"
+                  //     scope="row"
+                  //     sx={{ fontWeight: 700 }}
+                  //     align="right"
+                  //   >
+                  //     No history found at the moment!
+                  //   </TableCell>
+                  // </TableRow>
                   <TableRow
+                    key={example.request_id}
                     sx={{
                       "&:last-child td, &:last-child th": {
                         border: 0,

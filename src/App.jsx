@@ -8,6 +8,8 @@ import Home from "./Components/Home";
 import HistoryDonor from "./Components/HistoryDonor";
 import HistoryReciever from "./Components/HistoryReciever";
 import Rewards from "./Components/Rewards";
+import EditProfile from "./Components/EditProfile";
+import Header from "./Components/UI/Header";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -25,9 +27,11 @@ function App() {
             <Route path="/otp" element={<Otp />} />
             <Route path="/error" element={<Error />} />
             <Route path="/" element={<Home />} />
+            <Route path="/header" element={<Header />} />
             <Route path="/history-donor" element={<HistoryDonor />} />
             <Route path="/history-reciever" element={<HistoryReciever />} />
             <Route path="/rewards" element={<Rewards />} />
+            <Route path="/edit-profile" element={<EditProfile />} />
           </Routes>
         </BrowserRouter>
       </div>
