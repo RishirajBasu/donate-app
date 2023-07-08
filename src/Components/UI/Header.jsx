@@ -8,6 +8,7 @@ import { useEffect } from "react";
 import { Update } from "@mui/icons-material";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import moment from "moment";
 
 const Header = () => {
   // get request to udpateprofile api
@@ -30,11 +31,18 @@ const Header = () => {
 
   const jsdate = () => {
     const isodate = new Date(response.data.created_at);
-    return isodate.toString().slice(0, 25) + "Hrs";
+    let date = isodate.getDate(); //date
+    let year = isodate.getFullYear(); //date
+    console.log(moment([year, 0, date]).fromNow());
+    return moment([year, 6, date]).fromNow();
   };
   const update = () => {
     const isotime = new Date(response.data.coordinates.last_updated);
-    return isotime.toString().slice(0, 25) + "Hrs";
+    let date = isotime.getDate(); //date
+    console.log(date);
+    let year = isotime.getFullYear(); //date
+    console.log(moment([year, 0, date]).fromNow());
+    return moment([year, 6, date]).fromNow();
   };
 
   // geoLocation
