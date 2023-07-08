@@ -12,13 +12,10 @@ const EditProfile = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [prevData, setprevData] = useState({});
-  const values = {
-    fname: "",
-    lname: "",
-    date: "",
-    number: "",
-    address: "",
-  };
+  const [inputErrorFname, setinputErrorFname] = useState(false);
+  const [inputErrorLname, setinputErrorLname] = useState(false);
+  const [inputErrorPhone, setinputErrorPhone] = useState(false);
+  const [inputErrorAddress, setinputErrorAddress] = useState(false);
 
   const fetchProfileData = async (user_id) => {
     try {
@@ -33,7 +30,7 @@ const EditProfile = () => {
       }
     }
   };
-  const registerUser = async (values) => {
+  const registerUser = async () => {
     try {
       setLoading(true);
       const user_id = localStorage.getItem("user_id");
@@ -67,12 +64,39 @@ const EditProfile = () => {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(values);
   };
-  const handleBlur = (e) => {};
   const handleChange = (e) => {
-    values[e.target.name] = e.target.value;
+    if (e.target.name === "fname") {
+      if (e.target.value.length > 30 || e.target.value.length === 0) {
+        setinputErrorFname(true);
+      } else {
+        setinputErrorFname(false);
+      }
+    } else if (e.target.name === "lname") {
+      if (e.target.value.length > 30 || e.target.value.length === 0) {
+        setinputErrorLname(true);
+      } else {
+        setinputErrorLname(false);
+      }
+    } else if (e.target.name === "address") {
+      if (e.target.value.length > 100 || e.target.value.length === 0) {
+        setinputErrorAddress(true);
+      } else {
+        setinputErrorAddress(false);
+      }
+    } else if (e.target.name === "number") {
+      if (
+        e.target.value.length > 10 ||
+        e.target.value.length < 10 ||
+        !Number(e.target.value)
+      ) {
+        setinputErrorPhone(true);
+      } else {
+        setinputErrorPhone(false);
+      }
+    }
   };
+
   useEffect(() => {
     const user_id = localStorage.getItem("user_id");
     fetchProfileData(user_id);
@@ -109,12 +133,13 @@ const EditProfile = () => {
                   value={prevData.first_name}
                   onChange={(e) => {
                     setprevData({ ...prevData, first_name: e.target.value });
-                  }}
-                  onBlur={(e) => {
-                    handleBlur(e);
+                    handleChange(e);
                   }}
                   className="class_fname"
                 />
+                {inputErrorFname && (
+                  <p className="errorProfileMsg">enter a valid name</p>
+                )}
               </div>
 
               {/* LastName */}
@@ -130,11 +155,12 @@ const EditProfile = () => {
                   value={prevData.last_name}
                   onChange={(e) => {
                     setprevData({ ...prevData, last_name: e.target.value });
-                  }}
-                  onBlur={(e) => {
-                    handleBlur(e);
+                    handleChange(e);
                   }}
                 />
+                {inputErrorLname && (
+                  <p className="errorProfileMsg">enter a valid name</p>
+                )}
               </div>
             </div>
             {/* Email */}
@@ -148,9 +174,6 @@ const EditProfile = () => {
                 id="email"
                 autoComplete="off"
                 value={prevData.email}
-                onBlur={(e) => {
-                  handleBlur(e);
-                }}
                 readOnly
               />
             </div>
@@ -168,11 +191,12 @@ const EditProfile = () => {
                 value={prevData.address}
                 onChange={(e) => {
                   setprevData({ ...prevData, address: e.target.value });
-                }}
-                onBlur={(e) => {
-                  handleBlur(e);
+                  handleChange(e);
                 }}
               />
+              {inputErrorAddress && (
+                <p className="errorProfileMsg">enter a valid address</p>
+              )}
             </div>
 
             {/* Date of Birth */}
@@ -187,9 +211,6 @@ const EditProfile = () => {
                 autoComplete="off"
                 style={{ color: "black" }}
                 value={prevData.date_of_birth}
-                onBlur={(e) => {
-                  handleBlur(e);
-                }}
                 readOnly
               />
             </div>
@@ -207,11 +228,12 @@ const EditProfile = () => {
                 value={prevData.phone}
                 onChange={(e) => {
                   setprevData({ ...prevData, phone: e.target.value });
-                }}
-                onBlur={(e) => {
-                  handleBlur(e);
+                  handleChange(e);
                 }}
               />
+              {inputErrorPhone && (
+                <p className="errorProfileMsg">enter a valid number</p>
+              )}
             </div>
             {/* Adhaar card number */}
             <div className="form-group">
@@ -224,9 +246,6 @@ const EditProfile = () => {
                 id="adhaar_number"
                 autoComplete="off"
                 value={prevData.adhaar_number}
-                onBlur={(e) => {
-                  handleBlur(e);
-                }}
                 readOnly
               />
             </div>
@@ -237,7 +256,7 @@ const EditProfile = () => {
                 text={"Edit Profile"}
                 loading={loading}
                 onClick={() => {
-                  registerUser(values);
+                  registerUser();
                 }}
               />
             </div>
