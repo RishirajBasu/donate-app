@@ -10,14 +10,21 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import WorkspacePremiumIcon from "@mui/icons-material/WorkspacePremium";
 
-const Sidebar = ({ home, rewards, history }) => {
+const Sidebar = ({
+  home,
+  historyDonor,
+  historyReciever,
+  rewards,
+  donor,
+  active,
+}) => {
   const navigate = useNavigate();
   const access = localStorage.getItem("access");
   const refresh = localStorage.getItem("refresh");
   const url = "http://127.0.0.1:8000/accounts/logout/";
   const signOut = async () => {
     try {
-      let data = await axios.post(
+      let { data } = await axios.post(
         `${url}`,
         {
           refresh_token: refresh,
@@ -50,46 +57,175 @@ const Sidebar = ({ home, rewards, history }) => {
           <h1>Donate</h1>
           <button className="beDonor">Be a Donor!</button>
         </div>
-        <ul className="list">
-          {home && (
-            <button
-              className="listItem"
-              onClick={() => {
-                navigate("/");
-              }}
-            >
-              <HomeIcon className="icon" />
-              Home
-            </button>
-          )}
+        {donor ? (
+          <ul className="list">
+            {home ? (
+              <button
+                className="listItem"
+                onClick={() => {
+                  navigate("/");
+                }}
+                style={{
+                  padding: active.padding,
+                  border: active.border,
+                  textAlign: active.textAlign,
+                  color: active.color,
+                  borderRadius: active.borderRadius,
+                  backgroundColor: active.backgroundColor,
+                  cursor: active.cursor,
+                }}
+              >
+                <HomeIcon className="icon" />
+                Home
+              </button>
+            ) : (
+              <button
+                className="listItem"
+                onClick={() => {
+                  navigate("/");
+                }}
+              >
+                <HomeIcon className="icon" />
+                Home
+              </button>
+            )}
 
-          {history && (
-            <button
-              className="listItem"
-              onClick={() => {
-                navigate("/history");
-              }}
-            >
-              <HistoryIcon className="icon" />
-              History
+            {historyDonor ? (
+              <button
+                className="listItem"
+                onClick={() => {
+                  navigate("/history-donor");
+                }}
+                style={{
+                  padding: active.padding,
+                  border: active.border,
+                  textAlign: active.textAlign,
+                  color: active.color,
+                  borderRadius: active.borderRadius,
+                  backgroundColor: active.backgroundColor,
+                  cursor: active.cursor,
+                }}
+              >
+                <HistoryIcon className="icon" />
+                History
+              </button>
+            ) : (
+              <button
+                className="listItem"
+                onClick={() => {
+                  navigate("/history-donor");
+                }}
+              >
+                <HistoryIcon className="icon" />
+                History
+              </button>
+            )}
+
+            {rewards ? (
+              <button
+                className="listItem"
+                onClick={() => {
+                  navigate("/rewards");
+                }}
+                style={{
+                  padding: active.padding,
+                  border: active.border,
+                  textAlign: active.textAlign,
+                  color: active.color,
+                  borderRadius: active.borderRadius,
+                  backgroundColor: active.backgroundColor,
+                  cursor: active.cursor,
+                }}
+              >
+                <WorkspacePremiumIcon className="icon" />
+                Rewards
+              </button>
+            ) : (
+              <button
+                className="listItem"
+                onClick={() => {
+                  navigate("/rewards");
+                }}
+              >
+                <WorkspacePremiumIcon className="icon" />
+                Rewards
+              </button>
+            )}
+
+            <button className="signout donorExists" onClick={signOut}>
+              <ExitToAppIcon className="icon signoutIcon" />
+              Sign out
             </button>
-          )}
-          {rewards && (
-            <button
-              className="listItem"
-              onClick={() => {
-                navigate("/rewards");
-              }}
-            >
-              <WorkspacePremiumIcon className="icon" />
-              Rewards
+          </ul>
+        ) : (
+          <ul className="list">
+            {home ? (
+              <button
+                className="listItem"
+                onClick={() => {
+                  navigate("/");
+                }}
+                style={{
+                  padding: active.padding,
+                  border: active.border,
+                  textAlign: active.textAlign,
+                  color: active.color,
+                  borderRadius: active.borderRadius,
+                  backgroundColor: active.backgroundColor,
+                  cursor: active.cursor,
+                }}
+              >
+                <HomeIcon className="icon" />
+                Home
+              </button>
+            ) : (
+              <button
+                className="listItem"
+                onClick={() => {
+                  navigate("/");
+                }}
+              >
+                <HomeIcon className="icon" />
+                Home
+              </button>
+            )}
+
+            {historyReciever ? (
+              <button
+                className="listItem"
+                onClick={() => {
+                  navigate("/history-reciever");
+                }}
+                style={{
+                  padding: active.padding,
+                  border: active.border,
+                  textAlign: active.textAlign,
+                  color: active.color,
+                  borderRadius: active.borderRadius,
+                  backgroundColor: active.backgroundColor,
+                  cursor: active.cursor,
+                }}
+              >
+                <HistoryIcon className="icon" />
+                History
+              </button>
+            ) : (
+              <button
+                className="listItem"
+                onClick={() => {
+                  navigate("/history-reciever");
+                }}
+              >
+                <HistoryIcon className="icon" />
+                History
+              </button>
+            )}
+            <button className="signout" onClick={signOut}>
+              <ExitToAppIcon className="icon signoutIcon" />
+              Sign out
             </button>
-          )}
-          <button className="signout" onClick={signOut}>
-            <ExitToAppIcon className="icon signoutIcon" />
-            Sign out
-          </button>
-        </ul>
+          </ul>
+        )}
       </div>
     </div>
   );

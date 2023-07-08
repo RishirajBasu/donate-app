@@ -1,0 +1,15 @@
+.historyRight{
+   display: flex;
+   flex-direction: column;
+   margin-left: 285px ;
+}
+.historyTable{
+   margin: 20px;
+   padding: 10px;
+   border: none;
+ 
+}
+.coloredBg:nth-child(even){
+   background-color: #ffdcdccb;
+}
+
