@@ -8,7 +8,7 @@
   background-color: #850000;
   padding: 20px;
   box-sizing: border-box;
-  /* border-radius: 0px 50px 50px 0px; */
+  border-radius: 0px 50px 50px 0px;
   position: fixed;
   display: flex;
   flex-direction: column;
@@ -66,6 +66,7 @@
   flex-direction: row;
   justify-content: flex-start;
   transition: 90ms ease-in;
+  margin-top: 5px;
 }
 .icon {
   margin-right: 20px;
@@ -80,7 +81,7 @@
   padding: 20px;
   border: none;
   text-align: center;
-  color: antiquewhite;
+  color: white;
   border-radius: 20px;
   background-color: rgba(255, 255, 255, 0.383);
   cursor: pointer;
@@ -95,7 +96,7 @@
   text-align: left;
   font-weight: 500;
   font-size: larger;
-  color: antiquewhite;
+  color: white;
   display: flex;
   align-items: center;
   transition: 90ms ease-in;
@@ -108,4 +109,16 @@
   border-radius: 20px;
   background-color: rgba(255, 255, 255, 0.383);
   cursor: pointer;
+}
+.active{
+      padding: 20px;
+      border: none;
+      text-align: center;
+      color: white;
+      border-image-repeat: 20px;
+      background-color: rgba(255, 255, 255, 0.383);
+      cursor: pointer;
+}
+.donorExists{
+  margin-top: 150px;
 }
