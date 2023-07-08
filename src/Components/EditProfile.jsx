@@ -35,27 +35,15 @@ const EditProfile = () => {
   };
   const registerUser = async (values) => {
     try {
-      if (
-        values.fname === "" ||
-        values.lname === "" ||
-        values.date === "" ||
-        values.number === "" ||
-        values.address === ""
-      ) {
-        // alert("Kindly fill the Form properly");
-        toast.warn("Kindly fill the form properly");
-        return;
-      }
-
       setLoading(true);
+      const user_id = localStorage.getItem("user_id");
       let { data } = await axios.put(
         `http://127.0.0.1:8000/accounts/profile/${user_id}/`,
         {
-          first_name: values.fname,
-          last_name: values.lname,
-          date_of_birth: values.date,
-          phone: values.number,
-          address: values.address,
+          first_name: prevData.first_name,
+          last_name: prevData.last_name,
+          phone: prevData.phone,
+          address: prevData.address,
         },
         {
           headers: {
@@ -64,7 +52,7 @@ const EditProfile = () => {
         }
       );
 
-      toast.success("User updated successfully");
+      toast.success("Profile updated successfully");
 
       navigate("/");
     } catch (error) {
@@ -98,7 +86,7 @@ const EditProfile = () => {
       <div className="editContainerRight">
         <div className="form-container sign-up">
           <div className="edit_text">
-            <h1>Edit your profile: </h1>
+            <h1>Edit your profile </h1>
           </div>
           <form
             onSubmit={(e) => {
@@ -118,9 +106,9 @@ const EditProfile = () => {
                   name="fname"
                   id="fname"
                   autoComplete="off"
-                  // value={prevData.first_name}
+                  value={prevData.first_name}
                   onChange={(e) => {
-                    handleChange(e);
+                    setprevData({ ...prevData, first_name: e.target.value });
                   }}
                   onBlur={(e) => {
                     handleBlur(e);
@@ -139,9 +127,9 @@ const EditProfile = () => {
                   name="lname"
                   id="lname"
                   autoComplete="off"
-                  // value={prevData.last_name}
+                  value={prevData.last_name}
                   onChange={(e) => {
-                    handleChange(e);
+                    setprevData({ ...prevData, last_name: e.target.value });
                   }}
                   onBlur={(e) => {
                     handleBlur(e);
@@ -159,10 +147,7 @@ const EditProfile = () => {
                 name="email"
                 id="email"
                 autoComplete="off"
-                // value={prevData.email}
-                onChange={(e) => {
-                  handleChange(e);
-                }}
+                value={prevData.email}
                 onBlur={(e) => {
                   handleBlur(e);
                 }}
@@ -180,9 +165,9 @@ const EditProfile = () => {
                 name="address"
                 id="address"
                 autoComplete="off"
-                // value={prevData.address}
+                value={prevData.address}
                 onChange={(e) => {
-                  handleChange(e);
+                  setprevData({ ...prevData, address: e.target.value });
                 }}
                 onBlur={(e) => {
                   handleBlur(e);
@@ -201,13 +186,11 @@ const EditProfile = () => {
                 id="date"
                 autoComplete="off"
                 style={{ color: "black" }}
-                // value={prevData.date_of_birth}
-                onChange={(e) => {
-                  handleChange(e);
-                }}
+                value={prevData.date_of_birth}
                 onBlur={(e) => {
                   handleBlur(e);
                 }}
+                readOnly
               />
             </div>
 
@@ -221,9 +204,9 @@ const EditProfile = () => {
                 name="number"
                 id="number"
                 autoComplete="off"
-                // value={prevData.phone}
+                value={prevData.phone}
                 onChange={(e) => {
-                  handleChange(e);
+                  setprevData({ ...prevData, phone: e.target.value });
                 }}
                 onBlur={(e) => {
                   handleBlur(e);
@@ -240,10 +223,7 @@ const EditProfile = () => {
                 name="adhaar_number"
                 id="adhaar_number"
                 autoComplete="off"
-                // value={prevData.adhaar_number}
-                onChange={(e) => {
-                  handleChange(e);
-                }}
+                value={prevData.adhaar_number}
                 onBlur={(e) => {
                   handleBlur(e);
                 }}
