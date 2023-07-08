@@ -15,6 +15,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from "react-router-dom";
 
 const HistoryDonor = () => {
   const [data, setData] = useState([]);
@@ -33,6 +34,8 @@ const HistoryDonor = () => {
       cursor: "pointer",
     },
   };
+
+  const navigate = useNavigate();
 
   // donor window
   const fetchDonorHistory = async (user_id) => {
@@ -59,10 +62,19 @@ const HistoryDonor = () => {
       }
     }
   };
+
   useEffect(() => {
-    const user_id = localStorage.getItem("user_id");
-    fetchDonorHistory(user_id);
+    let donor_id = localStorage.getItem("donor_id");
+    console.log("Donor id", donor_id);
+    if (donor_id !== null) {
+      console.log("calling api");
+      fetchDonorHistory(donor_id);
+    } else {
+      toast.error("Donor not found!");
+      navigate("/");
+    }
   }, []);
+
   return (
     <div className="historyContainer">
       <div className="historyLeft">

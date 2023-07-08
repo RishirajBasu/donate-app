@@ -19,6 +19,7 @@ const Header = () => {
     try {
       let data = await axios.get(`${url}/accounts/profile/${user_id}`);
       setResponse(data);
+      localStorage.setItem("donor_id", data.donor_id);
     } catch (error) {
       if (error.response.status === 400) {
         toast.error(error.response.data.message);
