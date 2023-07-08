@@ -1,3 +1,98 @@
-.donorHeader {
-    margin-left: 280px;
+.donorPageConatinerRight {
+  margin-left: 300px;
+}
+
+.donorBody {
+  padding: 40px;
+}
+
+.pending-requests {
+  /* border: 1px solid red; */
+  width: 65%;
+}
+
+.donor-body-top {
+  display: flex;
+  margin-bottom: 40px;
+  gap: 60px;
+}
+
+.pending-requests h3,
+.level-card h3 {
+  font-size: 1.4rem;
+  color: rgb(97, 97, 97);
+  margin-bottom: 20px;
+}
+
+.donation-card {
+  background: rgb(236, 236, 236);
+  padding: 20px 26px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  gap: 20px;
+}
+
+.d-card-content {
+  display: flex;
+  align-items: center;
+  /* gap: 28px; */
+  row-gap: 10px;
+  column-gap: 28px;
+  flex-wrap: wrap;
+}
+
+.d-card-content h5 {
+  font-size: 1rem;
+  color: rgb(151, 151, 151);
+  font-weight: 600;
+}
+
+.tag {
+  background: rgb(218, 218, 218);
+  padding: 6px 16px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+}
+
+.d-card-button button {
+  padding: 12px 36px;
+  background: rgb(22, 185, 22);
+  border: none;
+  outline: none;
+  border-radius: 8px;
+  color: #fff;
+  font-weight: 500;
+  font-size: 1.05rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.d-card-button button:hover {
+  background: rgb(25, 178, 25);
+}
+
+.level-card-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgb(236, 236, 236);
+  padding: 18px;
+  border-radius: 16px;
+  background: #ee3d3d;
+  color: #fff;
+}
+
+.level-card-box h5 {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.level-card-box h1 {
+  font-size: 7rem;
+  color: rgb(255, 211, 54);
+  font-weight: 500;
 }
