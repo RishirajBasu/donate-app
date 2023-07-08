@@ -77,7 +77,7 @@ const HistoryReciever = () => {
     type_of_donation: "blood",
     is_urgent: true,
     is_fullfiled: true,
-    current_status: "fullfilled",
+    current_status: "pending",
     requested_by: 14,
     coordinates: 5,
   };
@@ -95,6 +95,9 @@ const HistoryReciever = () => {
       );
       setData(data);
       console.log("Data", data);
+      if (!data || data.length === 0) {
+        toast.warn("No history found at the moment!");
+      }
     } catch (error) {
       if (error.response.status === 400) {
         toast.error(error.response.data.message);
@@ -129,7 +132,7 @@ const HistoryReciever = () => {
                     align="left"
                     sx={{ fontSize: 16, fontWeight: 700 }}
                   >
-                    Name
+                    Donor
                   </TableCell>
                   <TableCell
                     align="left"
@@ -150,13 +153,6 @@ const HistoryReciever = () => {
                     sx={{ fontSize: 16, fontWeight: 700 }}
                   >
                     Units
-                  </TableCell>
-                  <TableCell
-                    align="left"
-                    className="tableHead"
-                    sx={{ fontSize: 16, fontWeight: 700 }}
-                  >
-                    Payment Status
                   </TableCell>
                   <TableCell
                     align="left"
@@ -187,18 +183,20 @@ const HistoryReciever = () => {
                       className="coloredBg"
                     >
                       <TableCell component="th" scope="row">
-                        {data.donor_id.user.first_name +
-                          " " +
-                          data.donor_id.user.last_name}
+                        {data.current_status === "fullfilled" ||
+                        data.current_status === "active"
+                          ? data.donor_id.user.first_name +
+                            " " +
+                            data.donor_id.user.last_name
+                          : "--"}
                       </TableCell>
+                      <TableCell align="left">{data.blood_group}</TableCell>
+                      <TableCell align="left">{data.current_status}</TableCell>
+                      <TableCell align="left">{data.units_required}</TableCell>
+                      <TableCell align="left">--</TableCell>
                       <TableCell align="left">
-                        {data.donor_id.user.blood_group}
+                        {data.required_on.slice(0, 10)}
                       </TableCell>
-                      <TableCell align="left">{data.status}</TableCell>
-                      <TableCell align="left">{data.units}</TableCell>
-                      <TableCell align="left">{data.paymentStatus}</TableCell>
-                      <TableCell align="left">{data.dateofDonation}</TableCell>
-                      <TableCell align="left">{data.dateofRequest}</TableCell>
                     </TableRow>
                   ))
                 ) : (
@@ -229,18 +227,13 @@ const HistoryReciever = () => {
                     className="coloredBg"
                   >
                     <TableCell component="th" scope="row">
-                      {example.donor_id.user.first_name +
-                        " " +
-                        example.donor_id.user.last_name}
+                      --
                     </TableCell>
-                    <TableCell align="left">
-                      {example.donor_id.blood_group}
-                    </TableCell>
-                    <TableCell align="left">{example.current_status}</TableCell>
-                    <TableCell align="left">{example.units_required}</TableCell>
-                    <TableCell align="left">{example.paymentStatus}</TableCell>
-                    <TableCell align="left">{example.dateofDonation}</TableCell>
-                    <TableCell align="left">{example.dateofRequest}</TableCell>
+                    <TableCell align="left">--</TableCell>
+                    <TableCell align="left">--</TableCell>
+                    <TableCell align="left">--</TableCell>
+                    <TableCell align="left">--</TableCell>
+                    <TableCell align="left">--</TableCell>
                   </TableRow>
                 )}
               </TableBody>

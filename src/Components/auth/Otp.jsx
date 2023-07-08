@@ -4,7 +4,7 @@ import axios from "axios";
 import OTPInput from "otp-input-react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useLocation, useNavigate } from "react-router";
+import { useLocation, useNavigate } from "react-router-dom";
 import LoadingButton from "../UI/LoadingButton";
 
 const Otp = () => {

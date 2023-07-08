@@ -152,7 +152,7 @@ const Sidebar = ({
               </button>
             )}
 
-            <button className="signout" onClick={signOut}>
+            <button className="signout donorExists" onClick={signOut}>
               <ExitToAppIcon className="icon signoutIcon" />
               Sign out
             </button>
